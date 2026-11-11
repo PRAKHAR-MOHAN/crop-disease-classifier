@@ -1,0 +1,44 @@
+# Two-stage fine-tuning configuration for EfficientNetV2-S (recommended balanced speed/accuracy backbone).
+experiment_name: efficientnetv2_s
+
+model:
+  backbone: tf_efficientnetv2_s.in21k_ft_in1k
+  pretrained: true
+  drop_rate: 0.3
+  drop_path_rate: 0.2
+
+training:
+  batch_size: 32
+  num_workers: 4
+  amp: true
+  grad_clip_norm: 1.0
+  label_smoothing: 0.1
+  use_class_weights: true
+  ema:
+    enabled: true
+    decay: 0.999
+
+  mixup:
+    enabled: true
+    mixup_alpha: 0.2
+    cutmix_alpha: 1.0
+    prob: 0.5
+    switch_prob: 0.5
+
+  # Stage 1: Freeze backbone, warm up classifier head
+  stage1:
+    epochs: 4
+    lr: 1.0e-3
+    weight_decay: 1.0e-2
+    warmup_epochs: 1
+
+  # Stage 2: Unfreeze entire network with discriminative LRs
+  stage2:
+    epochs: 16
+    backbone_lr: 1.0e-4
+    head_lr: 5.0e-4
+    min_lr: 1.0e-6
+    weight_decay: 1.0e-2
+    warmup_epochs: 2
+    early_stopping_patience: 5
+

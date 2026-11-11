@@ -1,0 +1,34 @@
+# FastAPI backend — production inference server with ONNX Runtime
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9
+pydantic>=2.8.0
+pydantic-settings>=2.4.0
+
+# ONNX Runtime (CPU-only in serving; no PyTorch required)
+onnxruntime>=1.19.0
+
+# Image processing
+Pillow>=10.4.0
+numpy>=1.26.4,<2.2.0
+opencv-python-headless>=4.10.0
+
+# Database (SQLite default, PostgreSQL drop-in via DATABASE_URL)
+sqlalchemy>=2.0.32
+aiosqlite>=0.20.0
+
+# Rate limiting & security
+slowapi>=0.1.9
+
+# Structured logging
+python-json-logger>=2.0.7
+
+# Config & utilities
+python-dotenv>=1.0.1
+PyYAML>=6.0.2
+huggingface-hub>=0.24.6
+
+# Testing
+pytest>=8.3.0
+httpx>=0.27.0
+

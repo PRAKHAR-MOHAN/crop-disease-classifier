@@ -1,0 +1,522 @@
+{
+  "_healthy_template": {
+    "severity": "healthy",
+    "symptoms": "Foliage shows uniform green coloration, turgid leaf structure, and no visible lesions, chlorosis, mold, or pest feeding damage.",
+    "organic_treatment": [
+      "No curative treatment required; continue balanced compost or vermicompost top-dressing.",
+      "Maintain beneficial microbial activity with periodic seaweed or compost tea foliar feeds if appropriate."
+    ],
+    "chemical_treatment": [
+      "No fungicide or insecticide application needed."
+    ],
+    "prevention": [
+      "Maintain adequate plant spacing for airflow and avoid overhead evening irrigation.",
+      "Inspect lower leaves weekly for early signs of spots, webbing, or insect eggs.",
+      "Rotate crops seasonally and sanitize pruning tools between beds."
+    ]
+  },
+  "_default_disease_template": {
+    "severity": "moderate",
+    "symptoms": "Abnormal leaf spotting, discoloration, necrotic lesions, wilting, or visible pest injury observed on plant tissue.",
+    "organic_treatment": [
+      "Prune and destroy heavily affected leaves away from the field (do not compost diseased debris).",
+      "Apply cold-pressed neem oil (0.5-1%) or potassium bicarbonate / copper soap per label guidance in cool evening hours."
+    ],
+    "chemical_treatment": [
+      "Consult a local agricultural extension officer to confirm the exact pathogen or pest before spraying.",
+      "Use a targeted, registered fungicide or insecticide following label dosage and pre-harvest intervals."
+    ],
+    "prevention": [
+      "Water at the root zone in the morning so foliage dries rapidly.",
+      "Practice a 2-3 year crop rotation and plant certified disease-free seeds or resistant varieties.",
+      "Control weeds and volunteer host plants around field borders."
+    ]
+  },
+  "_default_pest_template": {
+    "severity": "moderate",
+    "symptoms": "Chewing holes, stippling, curled leaves, honeydew residue, or visible insect larvae/adults on stems, leaves, or fruits.",
+    "organic_treatment": [
+      "Hand-pick visible caterpillars/beetles or dislodge soft-bodied insects with a strong water spray.",
+      "Apply neem oil (azadirachtin), insecticidal soap, or Bacillus thuringiensis (Bt) for caterpillar pests."
+    ],
+    "chemical_treatment": [
+      "Use selective, low-impact insecticides (e.g., spinosad or targeted label-approved actives) only when pest thresholds are exceeded.",
+      "Avoid spraying during active bee pollination hours."
+    ],
+    "prevention": [
+      "Install yellow/blue sticky traps or pheromone traps for early pest monitoring.",
+      "Encourage natural predators (ladybugs, lacewings, parasitic wasps) via flowering border strips.",
+      "Remove crop residues promptly after harvest to break pest pupation cycles."
+    ]
+  },
+  "Apple___Apple_scab": {
+    "severity": "moderate",
+    "symptoms": "Olive-green to dark velvety spots on leaves and fruit that turn brown, corky, and cracked; heavily infected leaves curl and drop early.",
+    "organic_treatment": [
+      "Apply wettable sulfur or liquid lime-sulfur sprays starting at green-tip stage through early petal fall.",
+      "Spray aerated compost tea or potassium bicarbonate on young foliage during wet spring periods."
+    ],
+    "chemical_treatment": [
+      "Apply protectant fungicides such as captan or mancozeb at 7-10 day intervals during rainy spring weather.",
+      "Rotate with systemic fungicides (e.g., myclobutanil or difenoconazole) to avoid resistance."
+    ],
+    "prevention": [
+      "Rake and shred or burn fallen leaves in autumn to eliminate overwintering fungal spores.",
+      "Prune tree canopy annually to improve sunlight penetration and air circulation.",
+      "Plant scab-resistant cultivars such as Liberty, Enterprise, or GoldRush."
+    ]
+  },
+  "Apple___Black_rot": {
+    "severity": "high",
+    "symptoms": "Purple flecks on leaves enlarging into 'frog-eye' brown lesions; firm brown-to-black concentric rings on rotting fruit and sunken bark cankers.",
+    "organic_treatment": [
+      "Prune out dead wood, twig dieback, and mummified fruit at least 15 cm below visible cankers.",
+      "Apply organic copper sprays early in the season where permitted."
+    ],
+    "chemical_treatment": [
+      "Apply captan, thiophanate-methyl, or strobilurin fungicides from tight-cluster through cover sprays.",
+      "Follow orchard spray schedules strictly during warm, humid summer months."
+    ],
+    "prevention": [
+      "Remove mummified fruits from trees and orchard floor before spring bud break.",
+      "Prevent bark injuries from equipment or sunscald and disinfect pruning shears with 70% alcohol."
+    ]
+  },
+  "Apple___Cedar_apple_rust": {
+    "severity": "moderate",
+    "symptoms": "Bright yellow-orange spots on upper leaf surfaces that develop tiny black dots and tube-like projections on leaf undersides.",
+    "organic_treatment": [
+      "Apply wettable sulfur or copper-based fungicides preventatively when nearby juniper/cedar galls swell after spring rain."
+    ],
+    "chemical_treatment": [
+      "Apply myclobutanil or mancozeb from pink-bud stage through 2-3 weeks post-petal fall."
+    ],
+    "prevention": [
+      "Remove nearby Eastern red cedar or juniper trees within 300 meters if feasible, or prune galls off ornamentals in late winter.",
+      "Choose rust-resistant apple varieties."
+    ]
+  },
+  "Cherry___Powdery_mildew": {
+    "severity": "moderate",
+    "symptoms": "White, powdery fungal patches on young leaves and shoots causing upward leaf curling, stunting, and premature drop.",
+    "organic_treatment": [
+      "Spray horticultural oil, neem oil, or potassium bicarbonate thoroughly covering leaf undersides.",
+      "Apply micronized sulfur (avoid when temperatures exceed 30 C to prevent leaf scorch)."
+    ],
+    "chemical_treatment": [
+      "Rotate DMI (myclobutanil) and QoI fungicides at 10-14 day intervals during shoot flush."
+    ],
+    "prevention": [
+      "Avoid excessive nitrogen fertilization that triggers dense succulent shoots.",
+      "Prune interior water sprouts to reduce humidity inside the canopy."
+    ]
+  },
+  "Corn___Gray_leaf_spot": {
+    "severity": "high",
+    "symptoms": "Rectangular, narrow tan-to-gray lesions bounded sharply by leaf veins; severe infections coalesce and blight entire leaves.",
+    "organic_treatment": [
+      "Remove severely infected lower leaves in small garden plots and apply biological Trichoderma or Bacillus subtilis bio-fungicides early."
+    ],
+    "chemical_treatment": [
+      "Apply azoxystrobin, pyraclostrobin, or propiconazole at VT-R1 (tassel to silking) if disease reaches the third leaf below the ear."
+    ],
+    "prevention": [
+      "Rotate corn with soybeans or non-host crops for at least 1-2 years.",
+      "Incorporate infected corn residue via tillage or select hybrids with high GLS resistance ratings."
+    ]
+  },
+  "Corn___Common_rust": {
+    "severity": "moderate",
+    "symptoms": "Small, elongated cinnamon-brown pustules scattered across both upper and lower leaf surfaces that rupture to release powdery spores.",
+    "organic_treatment": [
+      "Dust or spray sulfur early in sweet corn plots when pustules first appear on lower leaves."
+    ],
+    "chemical_treatment": [
+      "Apply triazole or strobilurin fungicides (e.g., azoxystrobin + propiconazole) if high pustule density occurs prior to silking."
+    ],
+    "prevention": [
+      "Plant rust-resistant corn hybrids and avoid late planting dates that coincide with peak spore arrival."
+    ]
+  },
+  "Corn___Northern_Leaf_Blight": {
+    "severity": "high",
+    "symptoms": "Long, cigar-shaped grayish-green to tan necrotic lesions (2.5-15 cm) running parallel to leaf margins.",
+    "organic_treatment": [
+      "Apply Bacillus amyloliquefaciens or copper-based organic sprays protectively in high-value sweet corn."
+    ],
+    "chemical_treatment": [
+      "Spray strobilurin + triazole fungicide mixtures between tasseling and early silking when lesions appear on lower canopy."
+    ],
+    "prevention": [
+      "Use hybrids carrying Ht resistance genes, rotate away from continuous corn, and manage overwintering residue."
+    ]
+  },
+  "Grape___Black_rot": {
+    "severity": "high",
+    "symptoms": "Reddish-brown circular leaf spots with dark borders and tiny black pycnidia; berries turn brown, shrivel into hard black mummies.",
+    "organic_treatment": [
+      "Apply copper hydroxide or sulfur sprays protectively prior to rain events from bud break until veraison."
+    ],
+    "chemical_treatment": [
+      "Use mancozeb, captan, or myclobutanil on a 7-14 day schedule during warm, wet bloom and early fruit set."
+    ],
+    "prevention": [
+      "Remove all mummified berries and infected canes during winter pruning.",
+      "Train vines and pull leaves around fruit clusters to maximize sunlight and rapid drying."
+    ]
+  },
+  "Grape___Esca_Black_Measles": {
+    "severity": "high",
+    "symptoms": "Interveinal 'tiger-stripe' yellowing or reddening on leaves, small dark spots on berries, and vascular wood streaking inside trunks.",
+    "organic_treatment": [
+      "Apply Trichoderma-based wound protectants immediately to fresh pruning cuts.",
+      "Remove and destroy dead cordons or severely symptomatic vines."
+    ],
+    "chemical_treatment": [
+      "No curative chemical spray reverses internal wood infection; protect pruning wounds with approved sealing pastes."
+    ],
+    "prevention": [
+      "Prune late in dormancy during dry weather and avoid large pruning cuts whenever possible.",
+      "Sanitize shears between vines."
+    ]
+  },
+  "Grape___Leaf_blight": {
+    "severity": "moderate",
+    "symptoms": "Irregular dull-red to dark-brown blotches that merge into large dead patches along leaf edges, causing premature defoliation.",
+    "organic_treatment": [
+      "Apply Bordeaux mixture or fixed copper sprays after heavy rain events in late summer."
+    ],
+    "chemical_treatment": [
+      "Apply mancozeb or captan if defoliation threatens sugar accumulation prior to harvest (respect PHI)."
+    ],
+    "prevention": [
+      "Improve trellis airflow, manage canopy vigor, and destroy fallen diseased leaves."
+    ]
+  },
+  "Orange___Citrus_greening": {
+    "severity": "critical",
+    "symptoms": "Asymmetrical blotchy yellow mottling across leaves, twig dieback, and small, lopsided fruit that stays green at the bottom and tastes bitter.",
+    "organic_treatment": [
+      "Control Asian citrus psyllid vectors using neem oil, horticultural oils, and kaolin clay barriers.",
+      "Note: No organic cure exists once a tree is systemically infected."
+    ],
+    "chemical_treatment": [
+      "Manage psyllid populations strictly via coordinated area-wide insecticide programs (e.g., imidacloprid, cyantraniliprole).",
+      "Report suspected cases to local agricultural quarantine authorities."
+    ],
+    "prevention": [
+      "Plant only certified disease-free nursery stock grown under screenhouses.",
+      "Promptly remove and destroy confirmed infected trees to protect neighboring orchards."
+    ]
+  },
+  "Peach___Bacterial_spot": {
+    "severity": "moderate",
+    "symptoms": "Small water-soaked angular leaf spots turning dark purple/black and dropping out ('shot-hole' appearance); sunken cracks on fruit.",
+    "organic_treatment": [
+      "Apply low-rate fixed copper sprays at dormancy and early leaf drop; avoid high-rate copper during active foliage to prevent phytotoxicity."
+    ],
+    "chemical_treatment": [
+      "Apply oxytetracycline (where registered) from shuck split through cover sprays during wet windy periods."
+    ],
+    "prevention": [
+      "Plant bacterial-spot-resistant peach cultivars and establish windbreaks to reduce sand-blasting leaf wounds.",
+      "Avoid sandy, exposed sites with high wind erosion."
+    ]
+  },
+  "Pepper_bell___Bacterial_spot": {
+    "severity": "high",
+    "symptoms": "Small water-soaked circular lesions on leaves that turn dark brown/black with yellow halos; raised scabby cork-like spots on fruit.",
+    "organic_treatment": [
+      "Remove infected leaves carefully when foliage is dry.",
+      "Apply copper soap + Bacillus subtilis bio-fungicide tank mixes weekly in humid weather."
+    ],
+    "chemical_treatment": [
+      "Spray copper hydroxide tank-mixed with mancozeb (where legally permitted) on a 5-7 day preventive interval."
+    ],
+    "prevention": [
+      "Use hot-water-treated or certified pathogen-free seed and resistant bell pepper varieties.",
+      "Avoid working in wet fields and rotate out of Solanaceae for 2-3 years."
+    ]
+  },
+  "Potato___Early_blight": {
+    "severity": "moderate",
+    "symptoms": "Dark brown circular leaf spots showing distinct concentric 'target-board' rings, typically starting on older lower leaves with surrounding yellowing.",
+    "organic_treatment": [
+      "Remove lower infected leaves and apply copper fungicide or Bacillus subtilis sprays every 7-10 days."
+    ],
+    "chemical_treatment": [
+      "Apply chlorothalonil, mancozeb, or azoxystrobin/difenoconazole starting at row closure or first lesion sighting."
+    ],
+    "prevention": [
+      "Maintain adequate nitrogen and potassium nutrition (stressed plants succumb rapidly).",
+      "Rotate potatoes for 3 years and use drip irrigation rather than overhead sprinklers."
+    ]
+  },
+  "Potato___Late_blight": {
+    "severity": "critical",
+    "symptoms": "Rapidly expanding dark water-soaked blotches on leaves and stems with pale green borders and white downy mold on undersides during humid mornings.",
+    "organic_treatment": [
+      "Immediately pull and bag severely infected plants so spores do not spread across the field.",
+      "Apply protective copper hydroxide sprays ahead of cool, wet weather."
+    ],
+    "chemical_treatment": [
+      "Apply systemic/translaminar oomycete fungicides (e.g., fluopicolide, cymoxanil, dimethomorph, or mandipropamid) alternated with mancozeb on a strict 5-7 day schedule."
+    ],
+    "prevention": [
+      "Plant certified blight-free seed tubers and destroy volunteer potatoes and cull piles.",
+      "Hill soil well over tubers to prevent spore wash-down and harvest after vines are fully dead."
+    ]
+  },
+  "Squash___Powdery_mildew": {
+    "severity": "moderate",
+    "symptoms": "Talcum-like white powdery spots on upper and lower leaf surfaces and petioles, causing premature yellowing and reduced fruit sweetness.",
+    "organic_treatment": [
+      "Spray neem oil, horticultural oil, potassium bicarbonate, or diluted wettable sulfur (below 29 C)."
+    ],
+    "chemical_treatment": [
+      "Rotate myclobutanil, triflumizole, or cyflufenamid with protectant chlorothalonil or sulfur."
+    ],
+    "prevention": [
+      "Select powdery-mildew-resistant squash cultivars and plant in full sun with wide spacing."
+    ]
+  },
+  "Strawberry___Leaf_scorch": {
+    "severity": "moderate",
+    "symptoms": "Numerous irregular dark purple blotches on leaves that coalesce, turning entire leaves reddish-brown and dried ('scorched').",
+    "organic_treatment": [
+      "Mow and remove infected older leaves after harvest; apply copper or sulfur sprays during spring growth."
+    ],
+    "chemical_treatment": [
+      "Apply captan, dodine, or strobilurin fungicides from early bloom through fruiting."
+    ],
+    "prevention": [
+      "Establish beds with certified disease-free crowns, use drip irrigation, and renovate beds post-harvest."
+    ]
+  },
+  "Tomato___Bacterial_spot": {
+    "severity": "high",
+    "symptoms": "Greasy dark spots (2-3 mm) on leaves often with yellow halos causing leaf drop; raised black scabs on green fruits.",
+    "organic_treatment": [
+      "Prune lower leaves for airflow and spray copper octanoate + Bacillus bio-fungicide early in the morning."
+    ],
+    "chemical_treatment": [
+      "Apply fixed copper + mancozeb tank mix preventively every 5-7 days during rainy periods."
+    ],
+    "prevention": [
+      "Sanitize stakes/cages, soak seeds in 50 C water for 25 minutes before sowing, and avoid handling wet plants."
+    ]
+  },
+  "Tomato___Early_blight": {
+    "severity": "moderate",
+    "symptoms": "Dark brown lesions with concentric rings ('bullseye' pattern) starting on oldest lower leaves, leading to yellowing and defoliation.",
+    "organic_treatment": [
+      "Prune infected bottom leaves up to the first fruit cluster and mulch soil to block splash-borne spores.",
+      "Apply copper soap or Serenade (Bacillus subtilis) every 7 days."
+    ],
+    "chemical_treatment": [
+      "Rotate chlorothalonil, mancozeb, or azoxystrobin at 7-10 day intervals."
+    ],
+    "prevention": [
+      "Stake or trellis tomatoes off the ground, mulch with straw, and practice 3-year non-solanaceous crop rotation."
+    ]
+  },
+  "Tomato___Late_blight": {
+    "severity": "critical",
+    "symptoms": "Large irregular dark water-soaked patches on leaves and dark greasy lesions on stems, accompanied by white fuzzy growth underneath in wet weather.",
+    "organic_treatment": [
+      "Remove and bag infected plants immediately; apply copper hydroxide prophylactically on healthy adjacent plants."
+    ],
+    "chemical_treatment": [
+      "Apply oomycete-targeted fungicides (mandipropamid, cymoxanil, or propamocarb) immediately upon local blight alerts."
+    ],
+    "prevention": [
+      "Grow in high tunnels or rain shelters if available, plant resistant varieties (e.g., Mountain Magic, Defiant), and never compost infected vines."
+    ]
+  },
+  "Tomato___Leaf_Mold": {
+    "severity": "moderate",
+    "symptoms": "Pale yellow-green blotches on upper leaf surfaces matched by olive-green to velvety purple-gray mold on the underside.",
+    "organic_treatment": [
+      "Increase greenhouse ventilation aggressively and remove lower affected leaves.",
+      "Apply copper or potassium bicarbonate sprays covering leaf undersides."
+    ],
+    "chemical_treatment": [
+      "Apply chlorothalonil, mancozeb, or difenoconazole where permitted in protected or field tomatoes."
+    ],
+    "prevention": [
+      "Keep relative humidity below 85% via ventilation fans and morning drip irrigation; select Cf-resistant hybrids."
+    ]
+  },
+  "Tomato___Septoria_leaf_spot": {
+    "severity": "moderate",
+    "symptoms": "Numerous small circular spots (2-5 mm) with dark brown edges and tan/gray centers containing tiny black fruiting bodies.",
+    "organic_treatment": [
+      "Strip infected lower leaves and disinfect shears; spray copper fungicide or sulfur at 7-day intervals."
+    ],
+    "chemical_treatment": [
+      "Apply chlorothalonil or mancozeb starting when lower foliage first shows spotting."
+    ],
+    "prevention": [
+      "Control nightshade weeds, mulch soil heavily, and sanitize trellises every season."
+    ]
+  },
+  "Tomato___Spider_mites": {
+    "severity": "moderate",
+    "symptoms": "Fine yellow/white stippling on upper leaf surfaces, bronzing, and delicate silken webbing beneath leaves during hot, dry weather.",
+    "organic_treatment": [
+      "Blast leaf undersides with cool water to break webs and dislodge mites.",
+      "Apply insecticidal soap, neem oil, or release predatory mites (Phytoseiulus persimilis)."
+    ],
+    "chemical_treatment": [
+      "Use selective miticides (abamectin, bifenazate, or spiromesifen) targeting leaf undersides; avoid broad-spectrum pyrethroids that flare mites."
+    ],
+    "prevention": [
+      "Reduce plant drought stress and dust on field roads, and avoid killing beneficial predatory insects."
+    ]
+  },
+  "Tomato___Target_Spot": {
+    "severity": "moderate",
+    "symptoms": "Small pinpoint necrotic spots enlarging to brown target-like lesions on leaves and sunken dark spots on fruit.",
+    "organic_treatment": [
+      "Remove lower diseased leaves and apply copper or Bacillus bio-fungicide sprays."
+    ],
+    "chemical_treatment": [
+      "Apply azoxystrobin, boscalid, or chlorothalonil when canopy closes."
+    ],
+    "prevention": [
+      "Ensure wide plant spacing and clean up all tomato crop debris post-harvest."
+    ]
+  },
+  "Tomato___Yellow_Leaf_Curl_Virus": {
+    "severity": "critical",
+    "symptoms": "Severe upward curling and cupping of young leaves, bright yellow margins, stunted bushy growth, and flower drop; spread by whiteflies.",
+    "organic_treatment": [
+      "Uproot and bag symptomatic young plants immediately to stop whiteflies from spreading the virus.",
+      "Control silverleaf whiteflies with neem oil, insecticidal soap, and yellow sticky traps."
+    ],
+    "chemical_treatment": [
+      "Control whitefly vectors using systemic neonicotinoids or flupyradifurone/pyriproxyfen rotated by mode of action."
+    ],
+    "prevention": [
+      "Use Ty-gene resistant tomato hybrids, reflective silver mulches, and insect-proof seedling nurseries."
+    ]
+  },
+  "Tomato___Mosaic_virus": {
+    "severity": "high",
+    "symptoms": "Light- and dark-green mosaic mottling on leaves, distorted 'fern-leaf' narrowing, and uneven fruit ripening.",
+    "organic_treatment": [
+      "Rogue out infected plants carefully and wash hands/tools thoroughly with 10% skim milk or trisodium phosphate solution."
+    ],
+    "chemical_treatment": [
+      "No chemical spray cures plant viruses; focus strictly on sanitation and vector exclusion."
+    ],
+    "prevention": [
+      "Do not handle tobacco products before touching tomato plants, use TMV-resistant varieties, and disinfect tools frequently."
+    ]
+  },
+  "Rice___Bacterial_leaf_blight": {
+    "severity": "high",
+    "symptoms": "Water-soaked stripes along leaf margins that turn yellow-white and dry out; milky bacterial ooze may appear on young lesions in morning dew.",
+    "organic_treatment": [
+      "Drain standing paddy water temporarily and apply Pseudomonas fluorescens biocontrol spray or copper-based organic formulations."
+    ],
+    "chemical_treatment": [
+      "Avoid unnecessary sprays once widespread; consult extension services for bactericide/copper oxychloride options at early onset."
+    ],
+    "prevention": [
+      "Plant resistant rice cultivars, avoid excessive nitrogen top-dressing, and keep bunds free of weed hosts."
+    ]
+  },
+  "Rice___Brown_spot": {
+    "severity": "moderate",
+    "symptoms": "Oval sesame-seed-shaped dark brown spots with gray centers and yellow halos on leaves and glumes.",
+    "organic_treatment": [
+      "Improve soil potassium/silicon nutrition and apply Trichoderma or neem-based foliar extracts."
+    ],
+    "chemical_treatment": [
+      "Treat seeds before sowing; apply propiconazole or iprodione + carbendazim at booting if severe."
+    ],
+    "prevention": [
+      "Correct nutrient-deficient or drought-stressed soils and sow clean, treated seed."
+    ]
+  },
+  "Rice___Leaf_blast": {
+    "severity": "critical",
+    "symptoms": "Diamond/spindle-shaped lesions with gray-white centers and dark brown borders; severe infections kill seedlings or cause neck rot.",
+    "organic_treatment": [
+      "Maintain steady shallow flood water (avoid intermittent drought stress) and apply silicon soil amendments."
+    ],
+    "chemical_treatment": [
+      "Apply tricyclazole, isoprothiolane, or azoxystrobin at early lesion emergence or booting stage."
+    ],
+    "prevention": [
+      "Split nitrogen applications, avoid overly dense seeding, and grow blast-resistant varieties."
+    ]
+  },
+  "Rice___Leaf_smut": {
+    "severity": "low",
+    "symptoms": "Small, slightly raised angular black spots scattered on both sides of rice leaves, typically appearing late in the season.",
+    "organic_treatment": [
+      "Generally minor economic impact; remove heavily infected crop straw post-harvest."
+    ],
+    "chemical_treatment": [
+      "Seldom requires targeted spray; broad-spectrum triazoles used for sheath/brown spot also suppress leaf smut."
+    ],
+    "prevention": [
+      "Balance nitrogen fertilization and practice clean field sanitation after harvest."
+    ]
+  },
+  "Cassava___Bacterial_blight": {
+    "severity": "high",
+    "symptoms": "Angular water-soaked leaf spots, blighting, wilting, gum exudates on stems, and shoot tip dieback.",
+    "organic_treatment": [
+      "Prune and burn infected stems; disinfect machetes between plants with bleach or flame."
+    ],
+    "chemical_treatment": [
+      "No systemic chemical cure; apply copper bactericides only in nurseries to limit spread."
+    ],
+    "prevention": [
+      "Use disease-free stem cuttings from healthy mother blocks and intercrop cassava with maize or legumes."
+    ]
+  },
+  "Cassava___Mosaic_disease": {
+    "severity": "critical",
+    "symptoms": "Severe yellow-green mosaic mottling, twisted deformed leaflets, and stunted plants yielding small roots.",
+    "organic_treatment": [
+      "Rogue infected young plants early and manage whitefly vectors with neem or insecticidal soap."
+    ],
+    "chemical_treatment": [
+      "No cure for infected plants; target whiteflies in seed multiplication plots if advised locally."
+    ],
+    "prevention": [
+      "Plant CMD-resistant cassava varieties and strictly select symptom-free planting stakes."
+    ]
+  },
+  "Pest___Aphids": {
+    "severity": "moderate",
+    "symptoms": "Clusters of tiny soft-bodied green, black, or yellow insects on tender shoots and leaf undersides; curled leaves and sticky honeydew.",
+    "organic_treatment": [
+      "Blast colonies with water, spray insecticidal soap or neem oil, and preserve ladybugs and hoverfly larvae."
+    ],
+    "chemical_treatment": [
+      "Apply selective aphicides (e.g., flonicamid or pymetrozine) only if natural predators fail to keep numbers below threshold."
+    ],
+    "prevention": [
+      "Avoid excess nitrogen flushing, use reflective mulches on seedlings, and plant insectary flowers (alyssum, dill)."
+    ]
+  },
+  "Pest___Armyworm": {
+    "severity": "high",
+    "symptoms": "Ragged defoliation, skeletonized young leaves ('windowpaning'), dark frass pellets in whorls, and striped caterpillars feeding at dusk.",
+    "organic_treatment": [
+      "Spray Bacillus thuringiensis (Bt kurstaki) or spinosad directly into plant whorls when larvae are small."
+    ],
+    "chemical_treatment": [
+      "Apply emamectin benzoate, chlorantraniliprole, or spinetoram early in larval instar stages."
+    ],
+    "prevention": [
+      "Monitor pheromone traps weekly, encourage parasitic wasps and birds, and scout leaf undersides for egg masses."
+    ]
+  }
+}
+

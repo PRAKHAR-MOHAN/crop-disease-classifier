@@ -1,0 +1,60 @@
+{
+  "model_version": "1.0.0-starter",
+  "backbone": "tf_efficientnetv2_s.in21k_ft_in1k",
+  "num_classes": 34,
+  "classes": [
+    "Apple___Apple_scab",
+    "Apple___Black_rot",
+    "Apple___Cedar_apple_rust",
+    "Cassava___Bacterial_blight",
+    "Cassava___Mosaic_disease",
+    "Cherry___Powdery_mildew",
+    "Corn___Common_rust",
+    "Corn___Gray_leaf_spot",
+    "Corn___Northern_Leaf_Blight",
+    "Grape___Black_rot",
+    "Grape___Esca_Black_Measles",
+    "Grape___Leaf_blight",
+    "Orange___Citrus_greening",
+    "Peach___Bacterial_spot",
+    "Pepper_bell___Bacterial_spot",
+    "Pest___Aphids",
+    "Pest___Armyworm",
+    "Potato___Early_blight",
+    "Potato___Late_blight",
+    "Rice___Bacterial_leaf_blight",
+    "Rice___Brown_spot",
+    "Rice___Leaf_blast",
+    "Rice___Leaf_smut",
+    "Squash___Powdery_mildew",
+    "Strawberry___Leaf_scorch",
+    "Tomato___Bacterial_spot",
+    "Tomato___Early_blight",
+    "Tomato___Late_blight",
+    "Tomato___Leaf_Mold",
+    "Tomato___Mosaic_virus",
+    "Tomato___Septoria_leaf_spot",
+    "Tomato___Spider_mites",
+    "Tomato___Target_Spot",
+    "Tomato___Yellow_Leaf_Curl_Virus"
+  ],
+  "image_size": 224,
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "temperature": 1.0,
+  "confidence_threshold": 0.55,
+  "energy_threshold": -3.5,
+  "plant_gate_threshold": 0.45,
+  "outputs": [
+    "logits",
+    "cam_maps"
+  ]
+}

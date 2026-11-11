@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: crop-disease-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - CORS_ORIGINS=http://localhost,http://localhost:5173,http://localhost:80
+      - MODEL_ONNX_PATH=/app/artifacts/model.onnx
+      - MODEL_META_PATH=/app/artifacts/model_meta.json
+      - ADVICE_KB_PATH=/app/configs/advice_kb.json
+      - DATABASE_URL=sqlite:////app/data/backend_data.sqlite3
+    volumes:
+      - ./artifacts:/app/artifacts:ro
+      - backend-data:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: crop-disease-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-data:
+

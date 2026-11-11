@@ -1,0 +1,25 @@
+# Knowledge distillation from a heavy teacher (or ensemble) into a lightweight CPU/mobile student.
+experiment_name: distill_mobilenetv3_large
+
+student:
+  backbone: mobilenetv3_large_100.ra_in1k
+  pretrained: true
+  drop_rate: 0.2
+  drop_path_rate: 0.0
+
+distillation:
+  temperature: 4.0
+  alpha_kd: 0.5 # Weight of KL-divergence soft teacher loss; (1 - alpha_kd) for ground-truth CE loss
+
+training:
+  batch_size: 48
+  num_workers: 4
+  epochs: 20
+  lr: 3.0e-4
+  min_lr: 1.0e-6
+  weight_decay: 1.0e-2
+  warmup_epochs: 2
+  amp: true
+  grad_clip_norm: 1.0
+  early_stopping_patience: 5
+

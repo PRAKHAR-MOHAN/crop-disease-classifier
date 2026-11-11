@@ -1,0 +1,47 @@
+# Base configuration shared across data, training, evaluation, and export scripts.
+project_name: crop-disease-classifier
+seed: 42
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  manifests_dir: data/manifests
+  artifacts_dir: artifacts
+  reports_dir: reports
+  figures_dir: reports/figures
+
+image:
+  size: 224
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  min_resolution: 64
+  max_aspect_ratio: 6.0
+
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  phash_hamming_threshold: 6
+  min_samples_per_class: 15
+  # Keep PlantDoc strictly as a real-field evaluation set to quantify the lab-to-field gap.
+  # Set to false if you also want PlantDoc field images mixed into train/val/test.
+  plantdoc_eval_only: true
+
+imbalance:
+  # Options: inverse_sqrt | effective_num | none
+  weight_strategy: inverse_sqrt
+  min_weight: 0.25
+  max_weight: 5.0
+  use_weighted_sampler: false
+
+tracking:
+  # Options: none | wandb | mlflow (can be overridden by TRACKING_BACKEND env var)
+  backend: none
+  wandb_project: crop-disease-classifier
+  mlflow_experiment: crop-disease-classifier
+
+ood:
+  confidence_threshold: 0.55
+  energy_threshold: -3.5
+  plant_gate_threshold: 0.45
+
