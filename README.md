@@ -177,5 +177,5 @@ python -m demo.app_gradio
 ---
 
 ## 📄 License
-This project is open-source under the MIT License.
+This project is open-source under the [MIT License](LICENSE) &copy; 2026 Prakhar.
 

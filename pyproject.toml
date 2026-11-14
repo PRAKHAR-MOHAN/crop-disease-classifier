@@ -2,6 +2,7 @@
 name = "crop-disease-classifier"
 version = "1.0.0"
 description = "End-to-end Crop Disease & Pest Classifier with calibrated ONNX inference, Grad-CAM explainability, FastAPI backend, and React frontend."
+authors = [{ name = "Prakhar" }]
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
