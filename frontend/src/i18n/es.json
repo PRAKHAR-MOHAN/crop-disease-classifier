@@ -1,0 +1,139 @@
+{
+  "app": {
+    "title": "CropAI",
+    "subtitle": "Estación de Diagnóstico de Patología Vegetal con IA",
+    "statusOnline": "Motor IA En Línea",
+    "statusDegraded": "IA Degradada",
+    "statusOffline": "Servidor Desconectado"
+  },
+  "nav": {
+    "history": "Historial",
+    "clearHistory": "Borrar Historial",
+    "darkMode": "Modo Oscuro",
+    "lightMode": "Modo Claro",
+    "language": "Idioma",
+    "aiPowered": "Impulsado por IA"
+  },
+  "hero": {
+    "liveBadge": "DETECCIÓN EN VIVO",
+    "title1": "Diagnostique",
+    "title2": "Sus",
+    "title3": "Cultivos",
+    "title4": "Al Instante",
+    "subtitle": "Suba una foto de su planta — nuestra IA calibrada la analiza en segundos y le proporciona un plan de tratamiento completo.",
+    "chipAi": "Impulsado por IA",
+    "chipInstant": "Resultados Rápidos",
+    "chipClasses": "38 Patologías",
+    "chipFree": "Uso Gratuito"
+  },
+  "cropSelect": {
+    "label": "Seleccione el Cultivo (Opcional — Mejora la Precisión)",
+    "autoDetect": "Detección Automática (Recomendado)",
+    "searchPlaceholder": "Buscar cultivo por nombre...",
+    "hint": "Seleccionar su cultivo afina las predicciones, o mantenga Detección Automática para análisis universal.",
+    "noMatch": "No se encontraron cultivos"
+  },
+  "upload": {
+    "headerTitle": "Subir Foto del Cultivo",
+    "headerSubtitle": "Funciona con hojas, tallos y frutos — cualquier parte afectada",
+    "dropzoneText": "Haga clic para seleccionar o arrastre aquí",
+    "dropzoneSub": "Se recomienda primer plano de alta resolución de la lesión",
+    "fileHint": "JPEG, PNG o WebP hasta 10 MB",
+    "cameraBtn": "Cámara",
+    "browseBtn": "Explorar Archivos",
+    "retakeBtn": "Tomar Otra Foto",
+    "removeBtn": "Eliminar",
+    "analyzing": "Analizando follaje con red neuronal...",
+    "analyzingSub": "Ejecutando inferencia EfficientNetV2-S y mapa de calor...",
+    "cancelBtn": "Cancelar Análisis",
+    "analyzeAction": "Analizar con IA"
+  },
+  "result": {
+    "diagnosisTitle": "DIAGNÓSTICO",
+    "confidenceTitle": "Confianza Calibrada",
+    "confidenceTooltip": "Probabilidades escaladas que reflejan la precisión real empírica.",
+    "confidenceHigh": "Alta Confianza",
+    "confidenceModerate": "Confianza Moderada",
+    "confidenceLow": "Revisión Recomendada",
+    "top3Title": "TOP-3 ALTERNATIVAS",
+    "heatmapTitle": "Explicabilidad Visual (Grad-CAM)",
+    "heatmapToggle": "Mapa de Calor",
+    "heatmapOpacity": "Opacidad",
+    "heatmapExplainer": "Las zonas resaltadas indican dónde se enfocó la IA para diagnosticar.",
+    "compareOriginal": "Original",
+    "compareHeatmap": "Mapa de Calor",
+    "statusHealthy": "Follaje Sano",
+    "statusDiseased": "Patología Identificada",
+    "statusPest": "Daño por Plaga",
+    "scanAnother": "Escanear Otro Cultivo",
+    "share": "Compartir Resultado",
+    "copyAdvice": "Copiar Consejos",
+    "copied": "¡Copiado al portapapeles!",
+    "downloadReport": "Descargar Informe PDF"
+  },
+  "advice": {
+    "title": "PLAN DE ACCIÓN AGRONÓMICO",
+    "symptoms": "SÍNTOMAS",
+    "organic": "TRATAMIENTO ORGÁNICO",
+    "chemical": "MANEJO QUÍMICO",
+    "prevention": "PREVENCIÓN Y MANEJO CULTURAL",
+    "farmersAdvice": "CONSEJO DEL AGRICULTOR",
+    "disclaimer": "Las recomendaciones de IA son informativas. Consulte siempre con su técnico agrónomo local antes de aplicar químicos."
+  },
+  "edge": {
+    "oodTitle": "Esta foto no parece ser de un cultivo reconocido",
+    "oodDescription": "El filtro de seguridad rechazó la imagen porque contiene elementos no foliares o desenfoque.",
+    "oodTip1": "Tome una foto bien iluminada de una sola hoja.",
+    "oodTip2": "Evite etiquetas, dedos o fondos complejos.",
+    "oodTip3": "Mantenga la cámara fija a unos 10-15 cm.",
+    "uncertainTitle": "Confianza Baja / Resultado Incierto",
+    "uncertainDescription": "Los síntomas visuales no son concluyentes. Repita con mejor luz o consulte a un especialista.",
+    "healthyTitle": "Planta Completamente Sana",
+    "healthyDescription": "No se detectaron lesiones ni plagas activas. ¡Continúe con el manejo preventivo habitual!"
+  },
+  "feedback": {
+    "question": "¿Fue acertado este diagnóstico?",
+    "yes": "Sí, es correcto",
+    "no": "No, es incorrecto",
+    "selectCorrection": "Seleccione la condición real...",
+    "commentPlaceholder": "Comentarios opcionales para reentrenamiento...",
+    "submit": "Enviar Corrección",
+    "submitting": "Enviando...",
+    "thankYou": "¡Gracias! Sus aportes ayudan a mejorar la próxima versión del modelo."
+  },
+  "history": {
+    "title": "Diagnósticos Recientes",
+    "empty": "No hay escaneos aún. Suba una imagen para comenzar.",
+    "clearConfirm": "¿Desea borrar el historial de escaneos?"
+  },
+  "errors": {
+    "noFile": "Seleccione un archivo de imagen válido.",
+    "unsupportedFile": "Formato no compatible. Suba JPEG, PNG o WebP.",
+    "fileTooLarge": "La imagen supera el límite de 10 MB.",
+    "rateLimit": "Límite de solicitudes superado. Espere {{seconds}} s.",
+    "networkError": "No se pudo conectar con el servidor. Revise su conexión.",
+    "serverError": "Error en el servidor de diagnóstico. Reintente en unos momentos.",
+    "aborted": "Análisis cancelado por el usuario.",
+    "retry": "Reintentar Análisis"
+  },
+  "tips": {
+    "title": "Cómo obtener diagnósticos con más del 99% de precisión",
+    "tip1Title": "Buena Luz Natural",
+    "tip1Desc": "Fotografíe bajo luz diurna evitando sombras duras.",
+    "tip2Title": "Hoja Individual",
+    "tip2Desc": "Enfoque en 1 o 2 hojas afectadas en lugar de todo el campo.",
+    "tip3Title": "Enfoque Nítido",
+    "tip3Desc": "Mantenga la cámara a 10–20 cm y toque la pantalla para enfocar.",
+    "tip4Title": "Fondo Limpio",
+    "tip4Desc": "Evite que aparezcan dedos, etiquetas o texto en la foto."
+  },
+  "samples": {
+    "title": "O pruebe de inmediato con una hoja de muestra:",
+    "sample1": "Tizón Temprano en Tomate",
+    "sample2": "Roya del Manzano",
+    "sample3": "Roya Común del Maíz"
+  },
+  "footer": {
+    "disclaimer": "CropAI es una herramienta de apoyo y no sustituye la inspección agronómica certificada."
+  }
+}

@@ -1,84 +1,142 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Eye, EyeOff, Sliders } from "lucide-react";
 
 interface GradCamViewerProps {
   originalSrc: string;
   gradcamBase64?: string | null;
 }
 
-export const GradCamViewer: React.FC<GradCamViewerProps> = ({ originalSrc, gradcamBase64 }) => {
+export const GradCamViewer: React.FC<GradCamViewerProps> = ({
+  originalSrc,
+  gradcamBase64,
+}) => {
   const { t } = useTranslation();
   const [showHeatmap, setShowHeatmap] = useState(true);
   const [opacity, setOpacity] = useState(0.55);
+  const [compareMode, setCompareMode] = useState<"overlay" | "split">("overlay");
+  const [splitPos, setSplitPos] = useState(50); // percentage for split view
 
   const heatmapSrc = gradcamBase64 ? `data:image/png;base64,${gradcamBase64}` : null;
 
   return (
-    <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-gray-200/80 dark:border-gray-800 rounded-3xl p-5 shadow-xl space-y-4">
-      {/* Title & Badge */}
-      <div className="flex items-center justify-between">
+    <div className="bg-white dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] rounded-3xl p-5 shadow-lg space-y-4">
+      {/* Title & Controls Header */}
+      <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center space-x-2">
-          <span className="text-lg">🔬</span>
+          <span className="text-xl">🔬</span>
           <div>
             <h3 className="text-sm font-bold text-gray-900 dark:text-white">
-              Visual Explainability (Grad-CAM)
+              {t("result.heatmapTitle")}
             </h3>
-            <p className="text-[11px] text-gray-500 dark:text-gray-400">
-              Neural network attention overlay on infected lesions
+            <p className="text-[11px] text-gray-500 dark:text-emerald-300/70">
+              {t("result.heatmapExplainer")}
             </p>
           </div>
         </div>
-        <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-          GAP Conv 1x1
-        </span>
+
+        {/* View Mode Toggle (Overlay vs Split) */}
+        {heatmapSrc && (
+          <div className="flex items-center space-x-1 bg-gray-100 dark:bg-[#143d26] p-1 rounded-xl text-xs">
+            <button
+              type="button"
+              onClick={() => setCompareMode("overlay")}
+              className={`px-2.5 py-1 rounded-lg font-bold transition ${
+                compareMode === "overlay"
+                  ? "bg-white dark:bg-emerald-600 text-gray-900 dark:text-white shadow-xs"
+                  : "text-gray-500 dark:text-gray-300"
+              }`}
+            >
+              Overlay
+            </button>
+            <button
+              type="button"
+              onClick={() => setCompareMode("split")}
+              className={`px-2.5 py-1 rounded-lg font-bold transition ${
+                compareMode === "split"
+                  ? "bg-white dark:bg-emerald-600 text-gray-900 dark:text-white shadow-xs"
+                  : "text-gray-500 dark:text-gray-300"
+              }`}
+            >
+              Split View
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Image container with layered overlay */}
-      <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-black shadow-inner border border-gray-200/80 dark:border-gray-800 group">
-        {/* Original photo */}
+      {/* Visual Canvas / Frame */}
+      <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black shadow-inner border border-gray-200 dark:border-gray-800 select-none">
+        {/* Base Photo */}
         <img
           src={originalSrc}
-          alt="Uploaded crop"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          alt="Original leaf"
+          className="w-full h-full object-contain"
         />
 
-        {/* Grad-CAM heatmap overlay */}
-        {heatmapSrc && showHeatmap && (
+        {/* Heatmap Overlay Mode */}
+        {heatmapSrc && showHeatmap && compareMode === "overlay" && (
           <img
             src={heatmapSrc}
-            alt="Grad-CAM attention heatmap"
-            className="absolute inset-0 w-full h-full object-cover mix-blend-screen transition-opacity duration-200 pointer-events-none"
+            alt="Grad-CAM saliency"
+            className="absolute inset-0 w-full h-full object-contain mix-blend-screen pointer-events-none transition-opacity duration-150"
             style={{ opacity }}
           />
         )}
 
-        {/* Floating live indicator */}
-        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-black/60 backdrop-blur-md text-white border border-white/20 flex items-center space-x-1.5 shadow-sm">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span>{showHeatmap && heatmapSrc ? "Heatmap Active" : "Original View"}</span>
-        </div>
+        {/* Split Compare Mode */}
+        {heatmapSrc && compareMode === "split" && (
+          <div
+            className="absolute inset-0 overflow-hidden pointer-events-none"
+            style={{ clipPath: `inset(0 ${100 - splitPos}% 0 0)` }}
+          >
+            <img
+              src={heatmapSrc}
+              alt="Grad-CAM saliency split"
+              className="w-full h-full object-contain mix-blend-screen"
+            />
+            {/* Split boundary bar */}
+            <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#22c55e] shadow-[0_0_8px_#22c55e]" />
+          </div>
+        )}
+
+        {/* Interactive Split Slider on bottom if split mode */}
+        {compareMode === "split" && (
+          <div className="absolute bottom-3 inset-x-6 bg-black/60 backdrop-blur-md p-2 rounded-xl flex items-center space-x-2">
+            <span className="text-[10px] text-white font-bold">{t("result.compareOriginal")}</span>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={splitPos}
+              onChange={(e) => setSplitPos(parseInt(e.target.value, 10))}
+              className="flex-1 accent-[#22c55e] cursor-pointer"
+            />
+            <span className="text-[10px] text-white font-bold">{t("result.compareHeatmap")}</span>
+          </div>
+        )}
       </div>
 
-      {/* Heatmap controls */}
-      {heatmapSrc && (
-        <div className="bg-gray-50 dark:bg-gray-800/50 p-3.5 rounded-2xl border border-gray-100 dark:border-gray-800 space-y-2.5">
-          <div className="flex items-center justify-between text-xs font-semibold">
-            <label className="flex items-center space-x-2.5 cursor-pointer select-none">
-              <input
-                type="checkbox"
-                checked={showHeatmap}
-                onChange={(e) => setShowHeatmap(e.target.checked)}
-                className="w-4 h-4 rounded text-brand-600 focus:ring-brand-500 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 cursor-pointer"
-              />
-              <span className="text-gray-800 dark:text-gray-200">{t("result.heatmapToggle")}</span>
-            </label>
-            <span className="font-mono text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/40 px-2 py-0.5 rounded-md border border-brand-200 dark:border-brand-800">
-              {Math.round(opacity * 100)}% Opacity
-            </span>
-          </div>
+      {/* Heatmap Controls Footer */}
+      {heatmapSrc && compareMode === "overlay" && (
+        <div className="bg-gray-50 dark:bg-gray-900/60 p-3.5 rounded-2xl border border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+          {/* Toggle Button */}
+          <button
+            type="button"
+            onClick={() => setShowHeatmap(!showHeatmap)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 min-h-[38px] ${
+              showHeatmap
+                ? "bg-[#16a34a] text-white"
+                : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+            }`}
+          >
+            {showHeatmap ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+            <span>{showHeatmap ? "Heatmap Active" : "Heatmap Hidden"}</span>
+          </button>
 
+          {/* Opacity Slider */}
           {showHeatmap && (
-            <div className="space-y-1">
+            <div className="flex items-center space-x-3 w-full sm:w-auto">
+              <Sliders className="w-3.5 h-3.5 text-gray-400" />
               <input
                 type="range"
                 min="0.1"
@@ -86,14 +144,12 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({ originalSrc, gradc
                 step="0.05"
                 value={opacity}
                 onChange={(e) => setOpacity(parseFloat(e.target.value))}
+                className="w-full sm:w-36 accent-[#22c55e] cursor-pointer"
                 aria-label={t("result.heatmapOpacity")}
-                className="w-full accent-brand-500 h-2 bg-gray-200 dark:bg-gray-700 rounded-lg cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] text-gray-400 dark:text-gray-500 font-mono">
-                <span>Subtle (10%)</span>
-                <span>Balanced (55%)</span>
-                <span>Vivid (100%)</span>
-              </div>
+              <span className="font-mono text-xs font-bold text-gray-700 dark:text-gray-300 min-w-[36px]">
+                {Math.round(opacity * 100)}%
+              </span>
             </div>
           )}
         </div>

@@ -1,25 +1,37 @@
 import { useEffect, useState } from "react";
 
+type Theme = "dark" | "light";
+
 export function useDarkMode() {
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved) return saved === "dark";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
+    const saved = localStorage.getItem("cropai_theme") as Theme | null;
+    if (saved === "light" || saved === "dark") return saved;
+    // Default to dark per design, fallback to system preference
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+      return "light";
+    }
+    return "dark";
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (isDark) {
+    if (theme === "dark") {
       root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
     } else {
       root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
     }
-  }, [isDark]);
+    localStorage.setItem("cropai_theme", theme);
+  }, [theme]);
 
-  const toggle = () => setIsDark((prev) => !prev);
+  const toggle = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
 
-  return { isDark, toggle };
+  return {
+    theme,
+    isDark: theme === "dark",
+    toggle,
+    setTheme,
+  };
 }
-

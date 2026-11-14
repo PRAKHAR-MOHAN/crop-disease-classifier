@@ -4,74 +4,93 @@ import {
   FeedbackResponse,
   HealthResponse,
   PredictionResponse,
-} from "@/types/prediction";
+  AdviceEntry,
+} from "./types";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
+const API_BASE =
+  import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  "/api";
 
 export class ApiError extends Error {
   status: number;
   detail: string;
+  retryAfterSeconds?: number;
 
-  constructor(status: number, detail: string) {
+  constructor(status: number, detail: string, retryAfterSeconds?: number) {
     super(detail);
     this.name = "ApiError";
     this.status = status;
     this.detail = detail;
+    this.retryAfterSeconds = retryAfterSeconds;
   }
 }
 
-async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-  const url = `${API_BASE}${endpoint.startsWith("/") ? endpoint : `/${endpoint}`}`;
+async function request<T>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> {
+  const cleanBase = API_BASE.endsWith("/") ? API_BASE.slice(0, -1) : API_BASE;
+  const cleanPath = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  const url = `${cleanBase}${cleanPath}`;
+
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    let detail = `Request failed with status ${response.status}`;
+    let detail = `Server responded with HTTP ${response.status}`;
     try {
       const err = await response.json();
-      detail = err.detail || err.error || detail;
+      if (err.detail) {
+        detail = typeof err.detail === "string" ? err.detail : JSON.stringify(err.detail);
+      } else if (err.error) {
+        detail = err.error;
+      }
     } catch {
-      // Non-JSON response
+      // Body was not JSON
     }
-    throw new ApiError(response.status, detail);
+
+    let retryAfter: number | undefined;
+    const retryHeader = response.headers.get("Retry-After");
+    if (retryHeader) {
+      const parsed = parseInt(retryHeader, 10);
+      if (!isNaN(parsed)) retryAfter = parsed;
+    }
+
+    throw new ApiError(response.status, detail, retryAfter);
   }
 
   return response.json();
 }
 
 export const api = {
-  checkHealth: (): Promise<HealthResponse> => request<HealthResponse>("/health"),
+  getHealth: (signal?: AbortSignal): Promise<HealthResponse> =>
+    request<HealthResponse>("/health", { signal }),
 
-  getClasses: (): Promise<ClassListResponse> => request<ClassListResponse>("/classes"),
+  getClasses: (signal?: AbortSignal): Promise<ClassListResponse> =>
+    request<ClassListResponse>("/classes", { signal }),
 
-  predict: async (file: File): Promise<PredictionResponse> => {
+  getAdvice: (classId: string, signal?: AbortSignal): Promise<AdviceEntry> =>
+    request<AdviceEntry>(`/advice/${encodeURIComponent(classId)}`, { signal }),
+
+  predict: async (
+    file: Blob | File,
+    signal?: AbortSignal
+  ): Promise<PredictionResponse> => {
     const formData = new FormData();
-    formData.append("file", file);
+    const fileName = (file as File).name || "leaf.jpg";
+    formData.append("file", file, fileName);
 
-    const url = `${API_BASE}/predict`;
-    const response = await fetch(url, {
+    return request<PredictionResponse>("/predict", {
       method: "POST",
       body: formData,
+      signal,
     });
-
-    if (!response.ok) {
-      let detail = `Inference failed (${response.status})`;
-      try {
-        const err = await response.json();
-        detail = err.detail || err.error || detail;
-      } catch {
-        // Non-JSON
-      }
-      throw new ApiError(response.status, detail);
-    }
-
-    return response.json();
   },
 
-  submitFeedback: (data: FeedbackRequest): Promise<FeedbackResponse> =>
+  submitFeedback: (payload: FeedbackRequest): Promise<FeedbackResponse> =>
     request<FeedbackResponse>("/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     }),
 };
-

@@ -139,6 +139,16 @@ cd frontend && npm run dev
 
 Visit `http://localhost:5173` to upload leaf images and test the live classifier.
 
+#### Adding a New Language to Frontend
+1. Create `frontend/src/i18n/<lang_code>.json` following the keys in `frontend/src/i18n/en.json`.
+2. Register the resource and add `<lang_code>` to `supportedLngs` in `frontend/src/i18n/index.ts`.
+3. Add the language `<option>` to the `<select>` in `frontend/src/components/Header.tsx`.
+
+#### Running Frontend Tests
+```bash
+cd frontend && npm test
+```
+
 ---
 
 ## 🧪 Testing

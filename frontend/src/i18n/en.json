@@ -1,0 +1,139 @@
+{
+  "app": {
+    "title": "CropAI",
+    "subtitle": "AI Plant Pathology Diagnostic Station",
+    "statusOnline": "AI Engine Online",
+    "statusDegraded": "AI Degraded",
+    "statusOffline": "Backend Offline"
+  },
+  "nav": {
+    "history": "History",
+    "clearHistory": "Clear History",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "language": "Language",
+    "aiPowered": "AI-Powered"
+  },
+  "hero": {
+    "liveBadge": "LIVE DETECTION",
+    "title1": "Diagnose",
+    "title2": "Your",
+    "title3": "Crop Disease",
+    "title4": "Instantly",
+    "subtitle": "Upload a photo of your plant — our calibrated AI analyzes it in seconds and gives you an actionable treatment plan.",
+    "chipAi": "AI-Powered",
+    "chipInstant": "Instant Results",
+    "chipClasses": "38 Pathologies",
+    "chipFree": "Free to Use"
+  },
+  "cropSelect": {
+    "label": "Select Crop Type (Optional — Improves Focus)",
+    "autoDetect": "Auto-Detect (Recommended)",
+    "searchPlaceholder": "Search crop by name...",
+    "hint": "Select your crop to refine predictions, or keep Auto-Detect for universal multi-crop screening.",
+    "noMatch": "No matching crops found"
+  },
+  "upload": {
+    "headerTitle": "Upload Crop Photo",
+    "headerSubtitle": "Works with leaves, stems, and fruits — any affected part of the plant",
+    "dropzoneText": "Click to browse photo or drag & drop here",
+    "dropzoneSub": "High-resolution close-up of infected area recommended",
+    "fileHint": "JPEG, PNG, or WebP up to 10 MB",
+    "cameraBtn": "Camera",
+    "browseBtn": "Browse Files",
+    "retakeBtn": "Retake / Replace Photo",
+    "removeBtn": "Remove",
+    "analyzing": "Analyzing foliage with neural network...",
+    "analyzingSub": "Running EfficientNetV2-S inference & Grad-CAM saliency...",
+    "cancelBtn": "Cancel Analysis",
+    "analyzeAction": "Analyze with AI"
+  },
+  "result": {
+    "diagnosisTitle": "DIAGNOSIS",
+    "confidenceTitle": "Calibrated Confidence",
+    "confidenceTooltip": "Temperature-scaled probabilities reflecting true empirical accuracy. Reduces overconfidence on ambiguous symptoms.",
+    "confidenceHigh": "High Confidence",
+    "confidenceModerate": "Moderate Confidence",
+    "confidenceLow": "Review Advised",
+    "top3Title": "TOP-3 ALTERNATIVES",
+    "heatmapTitle": "Visual Explainability (Grad-CAM)",
+    "heatmapToggle": "Attention Heatmap",
+    "heatmapOpacity": "Heatmap Opacity",
+    "heatmapExplainer": "Highlighted hot areas influenced the AI's diagnostic focus.",
+    "compareOriginal": "Original",
+    "compareHeatmap": "Heatmap",
+    "statusHealthy": "Healthy Foliage",
+    "statusDiseased": "Pathology Identified",
+    "statusPest": "Pest Injury",
+    "scanAnother": "Scan Another Crop",
+    "share": "Share Result",
+    "copyAdvice": "Copy Advice",
+    "copied": "Copied to clipboard!",
+    "downloadReport": "Download PDF Report"
+  },
+  "advice": {
+    "title": "AGRONOMIC ACTION PLAN",
+    "symptoms": "SYMPTOMS",
+    "organic": "ORGANIC & BIOCONTROL",
+    "chemical": "CHEMICAL SPRAY REGIMEN",
+    "prevention": "PREVENTION & CULTURAL PRACTICES",
+    "farmersAdvice": "FARMER'S ADVICE",
+    "disclaimer": "AI recommendations are advisory. Always consult your local agricultural extension officer and check regional pesticide regulations before applying chemicals."
+  },
+  "edge": {
+    "oodTitle": "This doesn't look like a recognised crop photo",
+    "oodDescription": "Our safety gate rejected this image because it contains non-foliar elements, heavy background clutter, or graphics.",
+    "oodTip1": "Take a well-lit photo of a single leaf.",
+    "oodTip2": "Avoid photos with product labels, text, or human fingers.",
+    "oodTip3": "Hold your camera steady about 10-15 cm away.",
+    "uncertainTitle": "Low Confidence / Uncertain Result",
+    "uncertainDescription": "The visual symptoms are ambiguous. Retake in better daylight or seek verification from an agronomist.",
+    "healthyTitle": "Healthy Plant Foliage",
+    "healthyDescription": "No fungal, bacterial, or pest lesions detected. Continue standard preventative maintenance!"
+  },
+  "feedback": {
+    "question": "Was this diagnosis accurate?",
+    "yes": "Yes, looks correct",
+    "no": "No, incorrect",
+    "selectCorrection": "Select the actual condition...",
+    "commentPlaceholder": "Optional field notes for model retraining...",
+    "submit": "Submit Correction",
+    "submitting": "Submitting...",
+    "thankYou": "Thank you! Your feedback helps retrain the next model iteration."
+  },
+  "history": {
+    "title": "Recent Diagnoses",
+    "empty": "No scans recorded yet. Upload an image to start.",
+    "clearConfirm": "Are you sure you want to clear your scan history?"
+  },
+  "errors": {
+    "noFile": "Please select a valid image file.",
+    "unsupportedFile": "Unsupported file format. Please upload JPEG, PNG, or WebP.",
+    "fileTooLarge": "Image is larger than 10 MB limit.",
+    "rateLimit": "Rate limit exceeded. Too many requests. Please wait {{seconds}}s.",
+    "networkError": "Could not connect to the diagnostic server. Check your network.",
+    "serverError": "Diagnostic server error. Please try again in a few moments.",
+    "aborted": "Analysis cancelled by user.",
+    "retry": "Retry Analysis"
+  },
+  "tips": {
+    "title": "How to get 99%+ accurate scans",
+    "tip1Title": "Good Daylight",
+    "tip1Desc": "Photograph in natural morning or afternoon sunlight, avoiding heavy shadows.",
+    "tip2Title": "Single Leaf",
+    "tip2Desc": "Focus on 1-2 symptomatic leaves rather than the entire garden bed.",
+    "tip3Title": "Sharp Focus",
+    "tip3Desc": "Keep camera 10–20 cm away and tap the leaf on your screen to focus.",
+    "tip4Title": "Avoid Clutter",
+    "tip4Desc": "Ensure fingers, product packaging, and artificial labels are kept out."
+  },
+  "samples": {
+    "title": "Or test immediately with a sample leaf:",
+    "sample1": "Tomato Early Blight",
+    "sample2": "Apple Cedar Rust",
+    "sample3": "Corn Common Rust"
+  },
+  "footer": {
+    "disclaimer": "CropAI is an assistive diagnostic tool and does not substitute for certified agronomic inspection."
+  }
+}
