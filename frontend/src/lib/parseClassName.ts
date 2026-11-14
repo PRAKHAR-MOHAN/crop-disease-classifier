@@ -117,3 +117,4 @@ export function parseClassName(rawLabel: string | undefined | null): ParsedClass
     scientificName: SCIENTIFIC_NAMES[rawLabel],
   };
 }
+

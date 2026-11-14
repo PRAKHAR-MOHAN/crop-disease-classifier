@@ -1,14 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { ExternalLink, Database } from "lucide-react";
 
 interface EmptyStateProps {
   onSelectSample: (file: File) => void;
   disabled?: boolean;
 }
 
-// Generate high quality synthetic sample leaf SVGs converted to JPEG blobs for instant 1-click test
+// Generate realistic leaf test patterns as JPEG blobs
 function createSampleLeafBlob(
-  type: "tomato_blight" | "apple_rust" | "corn_rust"
+  type: "tomato_blight" | "apple_rust" | "corn_rust" | "potato_blight" | "tomato_healthy" | "squash_mildew"
 ): Promise<File> {
   const canvas = document.createElement("canvas");
   canvas.width = 400;
@@ -21,73 +22,85 @@ function createSampleLeafBlob(
 
   // Draw natural leaf background
   const grad = ctx.createLinearGradient(0, 0, 400, 300);
-  grad.addColorStop(0, "#2d5a27");
-  grad.addColorStop(1, "#1a3818");
+  grad.addColorStop(0, "#234a1e");
+  grad.addColorStop(1, "#112610");
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, 400, 300);
 
-  // Draw Leaf shape
+  // Draw Leaf contour
   ctx.save();
   ctx.beginPath();
-  ctx.ellipse(200, 150, 150, 100, Math.PI / 12, 0, Math.PI * 2);
-  ctx.fillStyle = "#3e7b32";
+  ctx.ellipse(200, 150, 155, 105, Math.PI / 14, 0, Math.PI * 2);
+  ctx.fillStyle = type === "tomato_healthy" ? "#22c55e" : "#2d6a24";
   ctx.fill();
   ctx.lineWidth = 3;
-  ctx.strokeStyle = "#4f9841";
+  ctx.strokeStyle = "#3ea330";
   ctx.stroke();
 
-  // Draw characteristic lesions
-  if (type === "tomato_blight") {
-    // Concentric dark bullseye spots
+  // Draw specific pathology lesions
+  if (type === "tomato_blight" || type === "potato_blight") {
+    // Bullseye necrotic rings with yellow halos
     [
       { x: 150, y: 130, r: 24 },
       { x: 230, y: 170, r: 30 },
       { x: 180, y: 190, r: 18 },
     ].forEach((spot) => {
       ctx.beginPath();
-      ctx.arc(spot.x, spot.y, spot.r + 8, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(234, 179, 8, 0.4)";
+      ctx.arc(spot.x, spot.y, spot.r + 9, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(234, 179, 8, 0.45)";
       ctx.fill();
 
       ctx.beginPath();
       ctx.arc(spot.x, spot.y, spot.r, 0, Math.PI * 2);
-      ctx.fillStyle = "#451a03";
+      ctx.fillStyle = "#381504";
       ctx.fill();
 
       ctx.beginPath();
       ctx.arc(spot.x, spot.y, spot.r * 0.5, 0, Math.PI * 2);
       ctx.strokeStyle = "#78350f";
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2.5;
       ctx.stroke();
     });
   } else if (type === "apple_rust") {
-    // Orange-yellow rust pustules
+    // Orange-yellow cedar rust pustules
     [
       { x: 140, y: 120 },
-      { x: 170, y: 160 },
-      { x: 210, y: 110 },
-      { x: 250, y: 150 },
-      { x: 200, y: 200 },
+      { x: 175, y: 160 },
+      { x: 215, y: 110 },
+      { x: 255, y: 150 },
+      { x: 195, y: 205 },
     ].forEach((pt) => {
       ctx.beginPath();
-      ctx.arc(pt.x, pt.y, 16, 0, Math.PI * 2);
+      ctx.arc(pt.x, pt.y, 18, 0, Math.PI * 2);
       ctx.fillStyle = "#ea580c";
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
+      ctx.arc(pt.x, pt.y, 9, 0, Math.PI * 2);
       ctx.fillStyle = "#facc15";
       ctx.fill();
     });
-  } else {
-    // Corn linear rust streaks
+  } else if (type === "corn_rust") {
+    // Elongated cinnamon rust streaks
     [
-      { x: 130, y: 90, w: 10, h: 45 },
-      { x: 180, y: 140, w: 12, h: 55 },
-      { x: 230, y: 110, w: 10, h: 50 },
-      { x: 270, y: 160, w: 12, h: 40 },
+      { x: 130, y: 90, w: 10, h: 48 },
+      { x: 180, y: 140, w: 12, h: 58 },
+      { x: 230, y: 110, w: 10, h: 52 },
+      { x: 270, y: 160, w: 12, h: 44 },
     ].forEach((bar) => {
       ctx.fillStyle = "#b45309";
       ctx.fillRect(bar.x, bar.y, bar.w, bar.h);
+    });
+  } else if (type === "squash_mildew") {
+    // Talcum white powdery coating patches
+    [
+      { x: 160, y: 125, r: 35 },
+      { x: 220, y: 165, r: 42 },
+      { x: 185, y: 195, r: 28 },
+    ].forEach((patch) => {
+      ctx.beginPath();
+      ctx.arc(patch.x, patch.y, patch.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+      ctx.fill();
     });
   }
 
@@ -109,45 +122,110 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleSampleClick = async (type: "tomato_blight" | "apple_rust" | "corn_rust") => {
+  const handleSampleClick = async (
+    type: "tomato_blight" | "apple_rust" | "corn_rust" | "potato_blight" | "tomato_healthy" | "squash_mildew"
+  ) => {
     if (disabled) return;
     const file = await createSampleLeafBlob(type);
     onSelectSample(file);
   };
 
   return (
-    <div className="pt-2 text-center space-y-2">
-      <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-        {t("samples.title")}
-      </p>
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <button
-          type="button"
-          disabled={disabled}
-          onClick={() => handleSampleClick("tomato_blight")}
-          className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
-        >
-          <span>🍅</span>
-          <span>{t("samples.sample1")}</span>
-        </button>
-        <button
-          type="button"
-          disabled={disabled}
-          onClick={() => handleSampleClick("apple_rust")}
-          className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
-        >
-          <span>🍎</span>
-          <span>{t("samples.sample2")}</span>
-        </button>
-        <button
-          type="button"
-          disabled={disabled}
-          onClick={() => handleSampleClick("corn_rust")}
-          className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
-        >
-          <span>🌽</span>
-          <span>{t("samples.sample3")}</span>
-        </button>
+    <div className="pt-3 text-center space-y-4">
+      {/* 1-Click Instant Test Samples */}
+      <div className="space-y-2">
+        <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80">
+          🌱 {t("samples.title")}
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => handleSampleClick("tomato_blight")}
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#113521] hover:bg-[#1a4a2f] text-emerald-200 border border-[#235f3d] transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
+          >
+            <span>🍅</span>
+            <span>Tomato Early Blight</span>
+          </button>
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => handleSampleClick("apple_rust")}
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#113521] hover:bg-[#1a4a2f] text-emerald-200 border border-[#235f3d] transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
+          >
+            <span>🍎</span>
+            <span>Apple Cedar Rust</span>
+          </button>
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => handleSampleClick("corn_rust")}
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#113521] hover:bg-[#1a4a2f] text-emerald-200 border border-[#235f3d] transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
+          >
+            <span>🌽</span>
+            <span>Corn Common Rust</span>
+          </button>
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => handleSampleClick("potato_blight")}
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#113521] hover:bg-[#1a4a2f] text-emerald-200 border border-[#235f3d] transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
+          >
+            <span>🥔</span>
+            <span>Potato Late Blight</span>
+          </button>
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => handleSampleClick("squash_mildew")}
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#113521] hover:bg-[#1a4a2f] text-emerald-200 border border-[#235f3d] transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
+          >
+            <span>🎃</span>
+            <span>Squash Powdery Mildew</span>
+          </button>
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => handleSampleClick("tomato_healthy")}
+            className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#113521] hover:bg-[#1a4a2f] text-emerald-200 border border-[#235f3d] transition active:scale-95 flex items-center space-x-1.5 min-h-[36px]"
+          >
+            <span>✅</span>
+            <span>Healthy Tomato Leaf</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Dataset Download Links for Bulk / Desired Amount of Images */}
+      <div className="p-3.5 rounded-2xl bg-[#081e13]/90 border border-[#1b4d32] text-left space-y-2">
+        <div className="flex items-center space-x-2 text-xs font-bold text-emerald-300">
+          <Database className="w-4 h-4 text-[#22c55e]" />
+          <span>Download Free Test Images (54,000+ Leaf Photos)</span>
+        </div>
+        <p className="text-[11px] text-gray-300 leading-relaxed">
+          Need more images to test? Download any desired quantity of certified crop disease leaf photos directly from open datasets:
+        </p>
+        <div className="flex flex-wrap gap-2 pt-1">
+          <a
+            href="https://www.kaggle.com/datasets/emmarex/plantdisease"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#133d26] hover:bg-[#1c5434] text-emerald-200 border border-[#24623e] transition"
+          >
+            <span>📊</span>
+            <span>Kaggle PlantVillage (54,300+ Images)</span>
+            <ExternalLink className="w-3 h-3 ml-0.5 text-emerald-400" />
+          </a>
+          <a
+            href="https://github.com/pratikkayal/PlantDoc-Dataset"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#133d26] hover:bg-[#1c5434] text-emerald-200 border border-[#24623e] transition"
+          >
+            <span>🌾</span>
+            <span>PlantDoc Real-Field Photos (2,500+ Images)</span>
+            <ExternalLink className="w-3 h-3 ml-0.5 text-emerald-400" />
+          </a>
+        </div>
       </div>
     </div>
   );

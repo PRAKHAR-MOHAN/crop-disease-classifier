@@ -44,3 +44,4 @@ export const CameraButton: React.FC<CameraButtonProps> = ({
     </>
   );
 };
+

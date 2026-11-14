@@ -40,3 +40,4 @@ describe("validateImageFile", () => {
     expect(result).toBeDefined();
   });
 });
+

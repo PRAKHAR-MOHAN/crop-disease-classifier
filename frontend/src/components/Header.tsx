@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   const isOnline = !isError && health?.status === "healthy";
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-[#06150c]/85 border-b border-gray-200/80 dark:border-[#164429]/80 transition-colors">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#06150c]/90 border-b border-[#164429]/80 transition-colors">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         {/* Brand Logo & Status */}
         <div className="flex items-center space-x-2.5">
@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-black tracking-tight text-gray-900 dark:text-white">
+              <span className="text-lg font-black tracking-tight text-white">
                 Crop<span className="text-[#22c55e]">AI</span>
               </span>
               {/* Subtle backend health dot */}

@@ -76,3 +76,4 @@ export const ConfidenceBar: React.FC<ConfidenceBarProps> = ({ confidence }) => {
     </div>
   );
 };
+

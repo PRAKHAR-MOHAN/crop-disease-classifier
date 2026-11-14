@@ -61,3 +61,4 @@ export const StickyBottomBar: React.FC<StickyBottomBarProps> = ({
     </div>
   );
 };
+

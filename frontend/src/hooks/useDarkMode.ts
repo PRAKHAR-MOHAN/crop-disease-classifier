@@ -7,10 +7,7 @@ export function useDarkMode() {
     if (typeof window === "undefined") return "dark";
     const saved = localStorage.getItem("cropai_theme") as Theme | null;
     if (saved === "light" || saved === "dark") return saved;
-    // Default to dark per design, fallback to system preference
-    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
-      return "light";
-    }
+    // Default to dark theme for immersive emerald experience
     return "dark";
   });
 

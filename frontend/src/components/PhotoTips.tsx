@@ -68,3 +68,4 @@ export const PhotoTips: React.FC = () => {
     </div>
   );
 };
+

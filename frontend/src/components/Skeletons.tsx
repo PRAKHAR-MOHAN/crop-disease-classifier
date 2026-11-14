@@ -36,3 +36,4 @@ export const ResultSkeleton: React.FC = () => {
     </div>
   );
 };
+

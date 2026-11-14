@@ -287,3 +287,4 @@ ${farmersAdvice || ""}
     </div>
   );
 };
+

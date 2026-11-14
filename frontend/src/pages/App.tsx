@@ -147,7 +147,7 @@ const CropAiApp: React.FC = () => {
   const currentKnowledge = currentPrediction ? PATHOGEN_DETAILS[currentPrediction.label] : null;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-cropai-grid text-gray-900 dark:text-gray-100 flex flex-col justify-between font-sans selection:bg-[#22c55e] selection:text-black transition-colors">
+    <div className="min-h-screen bg-cropai-grid text-gray-100 flex flex-col justify-between font-sans selection:bg-[#22c55e] selection:text-black transition-colors">
       {/* Header */}
       <Header
         isDark={isDark}
@@ -161,20 +161,20 @@ const CropAiApp: React.FC = () => {
         {/* Compact Hero (Mobile-first, positioned to keep Upload Card above the fold) */}
         {!currentPrediction && (
           <div className="text-center space-y-3 pt-1 pb-1">
-            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-100 dark:bg-[#0c2417] text-emerald-800 dark:text-[#22c55e] border border-emerald-300 dark:border-[#1b4d32] shadow-xs">
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#0c2417] text-[#22c55e] border border-[#1b4d32] shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
               <span>{t("hero.liveBadge")}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.1] text-gray-900 dark:text-white">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.1] text-white">
               {t("hero.title1")} {t("hero.title2")}{" "}
-              <span className="text-[#16a34a] dark:text-[#22c55e] drop-shadow-[0_0_20px_rgba(34,197,94,0.35)]">
+              <span className="text-[#22c55e] drop-shadow-[0_0_20px_rgba(34,197,94,0.4)]">
                 {t("hero.title3")}
               </span>{" "}
               {t("hero.title4")}
             </h1>
 
-            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
               {t("hero.subtitle")}
             </p>
 
@@ -299,3 +299,4 @@ export const App: React.FC = () => {
 };
 
 export default App;
+

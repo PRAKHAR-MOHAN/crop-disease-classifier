@@ -54,3 +54,4 @@ export function getConfidenceTier(confidence: number): ConfidenceTier {
     textColor: "text-rose-600 dark:text-rose-400",
   };
 }
+

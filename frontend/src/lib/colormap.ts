@@ -43,3 +43,4 @@ export function getViridisColor(val: number): [number, number, number] {
   const b = Math.round(Math.max(0, Math.min(255, 84 + (1 - v) * 140)));
   return [r, g, b];
 }
+
