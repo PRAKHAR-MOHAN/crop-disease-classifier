@@ -12,12 +12,12 @@ export function useDarkMode() {
 
   useEffect(() => {
     const root = document.documentElement;
-    // Keep dark class consistently active for full emerald sinking
-    root.classList.add("dark");
     if (theme === "dark") {
-      root.classList.remove("light-mode");
+      root.classList.add("dark");
+      root.classList.remove("light");
     } else {
-      root.classList.add("light-mode");
+      root.classList.remove("dark");
+      root.classList.add("light");
     }
     localStorage.setItem("cropai_theme", theme);
   }, [theme]);

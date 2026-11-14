@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   const isOnline = !isError && health?.status === "healthy";
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#06150c]/90 border-b border-[#164429]/80 transition-colors">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/90 dark:bg-[#06150c]/90 border-b border-gray-200 dark:border-[#164429]/80 transition-colors">
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         {/* Brand Logo & Status */}
         <div className="flex items-center space-x-2.5">
@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-lg font-black tracking-tight text-white">
+              <span className="text-lg font-black tracking-tight text-gray-900 dark:text-white">
                 Crop<span className="text-[#22c55e]">AI</span>
               </span>
               {/* Subtle backend health dot */}
@@ -66,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Right Action Bar */}
         <div className="flex items-center space-x-2">
           {/* AI-Powered Pill */}
-          <div className="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#0c2417] text-[#4ade80] border border-[#1b4d32] shadow-sm select-none">
+          <div className="hidden sm:inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 dark:bg-[#0c2417] text-emerald-700 dark:text-[#4ade80] border border-emerald-200 dark:border-[#1b4d32] shadow-sm select-none">
             <Sparkles className="w-3 h-3 text-amber-400" />
             <span>{t("nav.aiPowered")}</span>
           </div>
@@ -75,7 +75,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onOpenHistory}
-            className="relative p-2 rounded-xl border border-gray-200 dark:border-[#1b4d32] text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#0c2417] transition active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="relative p-2 rounded-xl border border-gray-200 dark:border-[#1b4d32] bg-white dark:bg-[#0c2417] text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#143d26] transition active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={t("nav.history")}
             title={t("nav.history")}
           >
@@ -92,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({
             <select
               value={i18n.resolvedLanguage || "en"}
               onChange={handleLangChange}
-              className="py-2 px-2.5 rounded-xl border border-gray-200 dark:border-[#1b4d32] bg-gray-50 dark:bg-[#0c2417] text-gray-800 dark:text-gray-100 text-xs font-bold cursor-pointer shadow-sm focus:ring-2 focus:ring-[#22c55e] min-h-[44px]"
+              className="py-2 px-2.5 rounded-xl border border-gray-200 dark:border-[#1b4d32] bg-white dark:bg-[#0c2417] text-gray-800 dark:text-gray-100 text-xs font-bold cursor-pointer shadow-sm focus:ring-2 focus:ring-[#22c55e] min-h-[44px]"
               aria-label={t("nav.language")}
             >
               <option value="en">🇺🇸 EN</option>
@@ -105,7 +105,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onToggleTheme}
-            className="p-2 rounded-xl border border-gray-200 dark:border-[#1b4d32] text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#0c2417] transition active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 rounded-xl border border-gray-200 dark:border-[#1b4d32] bg-white dark:bg-[#0c2417] text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#143d26] transition active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={isDark ? t("nav.lightMode") : t("nav.darkMode")}
             title={isDark ? t("nav.lightMode") : t("nav.darkMode")}
           >

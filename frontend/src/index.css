@@ -8,21 +8,38 @@
   }
 
   html, body, #root {
+    min-height: 100vh;
+  }
+
+  html.dark, html.dark body, html.dark #root {
     background-color: #04110a;
     color: #f3f4f6;
-    min-height: 100vh;
+  }
+
+  html:not(.dark), html:not(.dark) body, html:not(.dark) #root {
+    background-color: #f8fafc;
+    color: #0f172a;
   }
 }
 
-/* Deep immersive dark emerald ambient grid - perfectly sunk, zero white haze */
-.bg-cropai-grid {
+/* Dark mode: Deep immersive dark emerald ambient grid - ZERO white fog */
+html.dark .bg-cropai-grid {
   background-color: #04110a;
   background-image: 
-    radial-gradient(ellipse 90% 45% at 50% 0%, rgba(16, 185, 129, 0.09), transparent 60%),
-    linear-gradient(rgba(34, 197, 94, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 197, 94, 0.055) 1px, transparent 1px);
-  background-size: 100% 100%, 32px 32px, 32px 32px;
-  background-position: center top, center center, center center;
+    linear-gradient(rgba(34, 197, 94, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px, 32px 32px;
+  background-position: center center, center center;
+}
+
+/* Light mode: Clean modern soft grid */
+html:not(.dark) .bg-cropai-grid {
+  background-color: #f8fafc;
+  background-image: 
+    linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px, 32px 32px;
+  background-position: center center, center center;
 }
 
 /* Custom emerald scrollbar */
