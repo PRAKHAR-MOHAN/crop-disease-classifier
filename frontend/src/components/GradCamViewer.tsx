@@ -20,16 +20,16 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
   const heatmapSrc = gradcamBase64 ? `data:image/png;base64,${gradcamBase64}` : null;
 
   return (
-    <div className="bg-white dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] rounded-3xl p-5 shadow-lg space-y-4">
+    <div className="bg-[#0c2417] border border-[#1b4d32] rounded-3xl p-5 shadow-lg space-y-4">
       {/* Title & Controls Header */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center space-x-2">
           <span className="text-xl">🔬</span>
           <div>
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white">
+            <h3 className="text-sm font-bold text-white">
               {t("result.heatmapTitle")}
             </h3>
-            <p className="text-[11px] text-gray-500 dark:text-emerald-300/70">
+            <p className="text-[11px] text-emerald-300/80">
               {t("result.heatmapExplainer")}
             </p>
           </div>
@@ -37,14 +37,14 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
 
         {/* View Mode Toggle (Overlay vs Split) */}
         {heatmapSrc && (
-          <div className="flex items-center space-x-1 bg-gray-100 dark:bg-[#143d26] p-1 rounded-xl text-xs">
+          <div className="flex items-center space-x-1 bg-[#143d26] border border-[#235f3d] p-1 rounded-xl text-xs">
             <button
               type="button"
               onClick={() => setCompareMode("overlay")}
               className={`px-2.5 py-1 rounded-lg font-bold transition ${
                 compareMode === "overlay"
-                  ? "bg-white dark:bg-emerald-600 text-gray-900 dark:text-white shadow-xs"
-                  : "text-gray-500 dark:text-gray-300"
+                  ? "bg-[#22c55e] text-black shadow-xs"
+                  : "text-emerald-300 hover:text-white"
               }`}
             >
               Overlay
@@ -54,8 +54,8 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
               onClick={() => setCompareMode("split")}
               className={`px-2.5 py-1 rounded-lg font-bold transition ${
                 compareMode === "split"
-                  ? "bg-white dark:bg-emerald-600 text-gray-900 dark:text-white shadow-xs"
-                  : "text-gray-500 dark:text-gray-300"
+                  ? "bg-[#22c55e] text-black shadow-xs"
+                  : "text-emerald-300 hover:text-white"
               }`}
             >
               Split View
@@ -65,7 +65,7 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
       </div>
 
       {/* Visual Canvas / Frame */}
-      <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black shadow-inner border border-gray-200 dark:border-gray-800 select-none">
+      <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-black shadow-inner border border-[#1b4d32] select-none">
         {/* Base Photo */}
         <img
           src={originalSrc}
@@ -118,7 +118,7 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
 
       {/* Heatmap Controls Footer */}
       {heatmapSrc && compareMode === "overlay" && (
-        <div className="bg-gray-50 dark:bg-gray-900/60 p-3.5 rounded-2xl border border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="bg-[#081e13] p-3.5 rounded-2xl border border-[#1b4d32] flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Toggle Button */}
           <button
             type="button"
@@ -126,7 +126,7 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
             className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 min-h-[38px] ${
               showHeatmap
                 ? "bg-[#16a34a] text-white"
-                : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                : "bg-[#143d26] text-emerald-200 border border-[#235f3d]"
             }`}
           >
             {showHeatmap ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
@@ -136,7 +136,7 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
           {/* Opacity Slider */}
           {showHeatmap && (
             <div className="flex items-center space-x-3 w-full sm:w-auto">
-              <Sliders className="w-3.5 h-3.5 text-gray-400" />
+              <Sliders className="w-3.5 h-3.5 text-emerald-400" />
               <input
                 type="range"
                 min="0.1"
@@ -147,7 +147,7 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
                 className="w-full sm:w-36 accent-[#22c55e] cursor-pointer"
                 aria-label={t("result.heatmapOpacity")}
               />
-              <span className="font-mono text-xs font-bold text-gray-700 dark:text-gray-300 min-w-[36px]">
+              <span className="font-mono text-xs font-bold text-emerald-200 min-w-[36px]">
                 {Math.round(opacity * 100)}%
               </span>
             </div>

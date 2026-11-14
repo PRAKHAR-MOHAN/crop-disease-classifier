@@ -49,8 +49,8 @@ export const FeedbackBox: React.FC<FeedbackBoxProps> = ({
 
   if (feedbackSent) {
     return (
-      <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-center space-y-1 text-emerald-800 dark:text-emerald-300 animate-in fade-in">
-        <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900 mx-auto flex items-center justify-center text-emerald-600 font-bold">
+      <div className="p-4 rounded-2xl bg-[#0e2c1c] border border-[#235f3d] text-center space-y-1 text-emerald-200 animate-in fade-in">
+        <div className="w-8 h-8 rounded-full bg-[#143d26] border border-[#235f3d] mx-auto flex items-center justify-center text-[#22c55e] font-bold">
           <Check className="w-4 h-4" />
         </div>
         <p className="text-xs font-bold">{t("feedback.thankYou")}</p>
@@ -59,12 +59,12 @@ export const FeedbackBox: React.FC<FeedbackBoxProps> = ({
   }
 
   return (
-    <div className="bg-white dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] rounded-3xl p-5 shadow-lg space-y-4">
+    <div className="bg-[#0c2417] border border-[#1b4d32] rounded-3xl p-5 shadow-lg space-y-4">
       <div className="flex items-center justify-between">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400">
           {t("feedback.question")}
         </h4>
-        <span className="text-[10px] font-mono text-gray-400">ID: {requestId.slice(0, 8)}</span>
+        <span className="text-[10px] font-mono text-emerald-400/70">ID: {requestId.slice(0, 8)}</span>
       </div>
 
       {isCorrect === null && (
@@ -72,17 +72,17 @@ export const FeedbackBox: React.FC<FeedbackBoxProps> = ({
           <button
             type="button"
             onClick={handlePositive}
-            className="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:hover:bg-emerald-900 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center space-x-1.5 transition active:scale-95 min-h-[44px]"
+            className="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-[#143d26] hover:bg-[#1c5434] text-emerald-200 border border-[#235f3d] flex items-center justify-center space-x-1.5 transition active:scale-95 min-h-[44px]"
           >
-            <ThumbsUp className="w-3.5 h-3.5" />
+            <ThumbsUp className="w-3.5 h-3.5 text-[#22c55e]" />
             <span>{t("feedback.yes")}</span>
           </button>
           <button
             type="button"
             onClick={handleNegativeClick}
-            className="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 flex items-center justify-center space-x-1.5 transition active:scale-95 min-h-[44px]"
+            className="flex-1 py-2.5 px-3 rounded-xl text-xs font-bold bg-[#143d26] hover:bg-[#1c5434] text-emerald-200 border border-[#235f3d] flex items-center justify-center space-x-1.5 transition active:scale-95 min-h-[44px]"
           >
-            <ThumbsDown className="w-3.5 h-3.5" />
+            <ThumbsDown className="w-3.5 h-3.5 text-amber-400" />
             <span>{t("feedback.no")}</span>
           </button>
         </div>
@@ -91,14 +91,14 @@ export const FeedbackBox: React.FC<FeedbackBoxProps> = ({
       {isCorrect === false && (
         <form onSubmit={handleSubmitNegative} className="space-y-3 animate-in fade-in">
           <div>
-            <label className="block text-[11px] font-semibold text-gray-600 dark:text-gray-300 mb-1">
+            <label className="block text-[11px] font-semibold text-emerald-300 mb-1">
               {t("feedback.selectCorrection")}
             </label>
             <select
               value={correctedClass}
               onChange={(e) => setCorrectedClass(e.target.value)}
               required
-              className="w-full py-2 px-3 rounded-xl text-xs font-medium border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-[#22c55e]"
+              className="w-full py-2 px-3 rounded-xl text-xs font-medium border border-[#1b4d32] bg-[#05140a] text-white focus:ring-2 focus:ring-[#22c55e]"
             >
               <option value="">-- {t("feedback.selectCorrection")} --</option>
               {classesData?.classes
@@ -118,7 +118,7 @@ export const FeedbackBox: React.FC<FeedbackBoxProps> = ({
               placeholder={t("feedback.commentPlaceholder")}
               rows={2}
               maxLength={500}
-              className="w-full p-2.5 rounded-xl text-xs border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-[#22c55e]"
+              className="w-full p-2.5 rounded-xl text-xs border border-[#1b4d32] bg-[#05140a] text-white focus:ring-2 focus:ring-[#22c55e]"
             />
           </div>
 
@@ -126,7 +126,7 @@ export const FeedbackBox: React.FC<FeedbackBoxProps> = ({
             <button
               type="button"
               onClick={() => setIsCorrect(null)}
-              className="py-1.5 px-3 rounded-xl text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 min-h-[36px]"
+              className="py-1.5 px-3 rounded-xl text-xs font-semibold text-emerald-300 hover:text-white hover:bg-[#143d26] min-h-[36px]"
             >
               Cancel
             </button>

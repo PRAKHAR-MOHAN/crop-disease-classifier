@@ -4,26 +4,25 @@
 
 @layer base {
   :focus-visible {
-    @apply outline-none ring-2 ring-emerald-500 ring-offset-2 ring-offset-black;
+    @apply outline-none ring-2 ring-emerald-500 ring-offset-2 ring-offset-[#04110a];
   }
 
-  html, body {
-    background-color: #05140a;
+  html, body, #root {
+    background-color: #04110a;
     color: #f3f4f6;
+    min-height: 100vh;
   }
 }
 
-/* Deep immersive ambient grid with radial emerald illumination */
+/* Deep immersive dark emerald ambient grid - perfectly sunk, zero white haze */
 .bg-cropai-grid {
-  background-color: #05140a;
+  background-color: #04110a;
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 197, 94, 0.22), transparent 70%),
-    radial-gradient(circle at 100% 50%, rgba(16, 185, 129, 0.08), transparent 50%),
-    radial-gradient(circle at 0% 50%, rgba(5, 150, 105, 0.08), transparent 50%),
-    linear-gradient(rgba(34, 197, 94, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 197, 94, 0.06) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
-  background-position: center top, center right, center left, center center, center center;
+    radial-gradient(ellipse 90% 45% at 50% 0%, rgba(16, 185, 129, 0.09), transparent 60%),
+    linear-gradient(rgba(34, 197, 94, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.055) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+  background-position: center top, center center, center center;
 }
 
 /* Custom emerald scrollbar */
@@ -33,7 +32,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #05140a;
+  background: #04110a;
 }
 
 ::-webkit-scrollbar-thumb {

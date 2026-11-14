@@ -196,34 +196,49 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       </div>
 
       {/* Dataset Download Links for Bulk / Desired Amount of Images */}
-      <div className="p-3.5 rounded-2xl bg-[#081e13]/90 border border-[#1b4d32] text-left space-y-2">
-        <div className="flex items-center space-x-2 text-xs font-bold text-emerald-300">
-          <Database className="w-4 h-4 text-[#22c55e]" />
-          <span>Download Free Test Images (54,000+ Leaf Photos)</span>
+      <div className="p-4 rounded-2xl bg-[#081e13] border border-[#1b4d32] text-left space-y-2.5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2 text-xs font-bold text-emerald-300">
+            <Database className="w-4 h-4 text-[#22c55e]" />
+            <span>Download Certified Leaf Datasets (54,000+ Photos)</span>
+          </div>
+          <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-[#143d26] text-[#4ade80] border border-[#235f3d]">
+            Free & Open Access
+          </span>
         </div>
-        <p className="text-[11px] text-gray-300 leading-relaxed">
-          Need more images to test? Download any desired quantity of certified crop disease leaf photos directly from open datasets:
+        <p className="text-[11px] text-emerald-200/80 leading-relaxed">
+          Need any desired amount of real leaf photos to test? You can download single leaves or complete batches from these repositories:
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
           <a
             href="https://www.kaggle.com/datasets/emmarex/plantdisease"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#133d26] hover:bg-[#1c5434] text-emerald-200 border border-[#24623e] transition"
+            className="inline-flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-[#133d26] hover:bg-[#1c5434] text-white border border-[#24623e] transition active:scale-95 shadow-sm"
           >
             <span>📊</span>
             <span>Kaggle PlantVillage (54,300+ Images)</span>
-            <ExternalLink className="w-3 h-3 ml-0.5 text-emerald-400" />
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 text-[#22c55e]" />
           </a>
           <a
             href="https://github.com/pratikkayal/PlantDoc-Dataset"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#133d26] hover:bg-[#1c5434] text-emerald-200 border border-[#24623e] transition"
+            className="inline-flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-[#133d26] hover:bg-[#1c5434] text-white border border-[#24623e] transition active:scale-95 shadow-sm"
           >
             <span>🌾</span>
             <span>PlantDoc Real-Field Photos (2,500+ Images)</span>
-            <ExternalLink className="w-3 h-3 ml-0.5 text-emerald-400" />
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 text-[#22c55e]" />
+          </a>
+          <a
+            href="https://data.mendeley.com/datasets/tywbtsjrjv/1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-[#133d26] hover:bg-[#1c5434] text-white border border-[#24623e] transition active:scale-95 shadow-sm"
+          >
+            <span>🔬</span>
+            <span>Mendeley Plant Pathology Dataset</span>
+            <ExternalLink className="w-3.5 h-3.5 ml-0.5 text-[#22c55e]" />
           </a>
         </div>
       </div>

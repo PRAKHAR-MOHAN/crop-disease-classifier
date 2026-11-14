@@ -5,18 +5,19 @@ type Theme = "dark" | "light";
 export function useDarkMode() {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") return "dark";
+    // Always default to deep emerald dark theme
     const saved = localStorage.getItem("cropai_theme") as Theme | null;
-    if (saved === "light" || saved === "dark") return saved;
-    // Default to dark theme for immersive emerald experience
-    return "dark";
+    return saved === "light" ? "light" : "dark";
   });
 
   useEffect(() => {
     const root = document.documentElement;
+    // Keep dark class consistently active for full emerald sinking
+    root.classList.add("dark");
     if (theme === "dark") {
-      root.classList.add("dark");
+      root.classList.remove("light-mode");
     } else {
-      root.classList.remove("dark");
+      root.classList.add("light-mode");
     }
     localStorage.setItem("cropai_theme", theme);
   }, [theme]);

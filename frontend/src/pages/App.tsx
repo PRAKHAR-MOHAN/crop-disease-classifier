@@ -166,30 +166,30 @@ const CropAiApp: React.FC = () => {
               <span>{t("hero.liveBadge")}</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.1] text-white">
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.1] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
               {t("hero.title1")} {t("hero.title2")}{" "}
-              <span className="text-[#22c55e] drop-shadow-[0_0_20px_rgba(34,197,94,0.4)]">
+              <span className="text-[#22c55e] drop-shadow-[0_0_24px_rgba(34,197,94,0.6)]">
                 {t("hero.title3")}
               </span>{" "}
               {t("hero.title4")}
             </h1>
 
-            <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto leading-relaxed drop-shadow-sm">
               {t("hero.subtitle")}
             </p>
 
             {/* Feature Pills */}
             <div className="flex flex-wrap items-center justify-center gap-1.5 pt-1">
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/80 dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] text-gray-700 dark:text-gray-300">
+              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
                 🤖 {t("hero.chipAi")}
               </span>
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/80 dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] text-gray-700 dark:text-gray-300">
+              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
                 ⚡ {t("hero.chipInstant")}
               </span>
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/80 dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] text-gray-700 dark:text-gray-300">
+              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
                 🟢 {t("hero.chipClasses")}
               </span>
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/80 dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] text-gray-700 dark:text-gray-300">
+              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
                 🆓 {t("hero.chipFree")}
               </span>
             </div>

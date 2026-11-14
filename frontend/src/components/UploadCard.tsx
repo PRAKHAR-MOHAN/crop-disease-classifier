@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { UploadCloud, FolderOpen, Images, Plus, Trash2 } from "lucide-react";
+import { UploadCloud, Images, Plus, Trash2 } from "lucide-react";
 import { CropSelect } from "./CropSelect";
 import { CameraButton } from "./CameraButton";
 import { ImagePreview } from "./ImagePreview";
@@ -244,10 +244,10 @@ export const UploadCard: React.FC<UploadCardProps> = ({
                 type="button"
                 disabled={isLoading}
                 onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center space-x-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold border border-[#235f3d] bg-[#113521] hover:bg-[#1a4a2f] text-emerald-200 shadow-sm transition active:scale-95 min-h-[44px]"
+                className="inline-flex items-center space-x-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold border border-[#235f3d] bg-[#113521] hover:bg-[#1a4a2f] text-white shadow-sm transition active:scale-95 min-h-[44px]"
               >
-                <FolderOpen className="w-4 h-4" />
-                <span>Upload Photos</span>
+                <Images className="w-4 h-4 text-[#22c55e]" />
+                <span>Select Photos (Any Amount)</span>
               </button>
             </div>
           </div>

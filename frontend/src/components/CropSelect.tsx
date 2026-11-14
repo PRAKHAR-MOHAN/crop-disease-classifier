@@ -93,7 +93,7 @@ export const CropSelect: React.FC<CropSelectProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full py-2.5 px-3.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-100 hover:border-[#22c55e] focus:outline-none focus:ring-2 focus:ring-[#22c55e] transition min-h-[44px]"
+        className="w-full py-2.5 px-3.5 rounded-xl border border-[#1b4d32] bg-[#0c2417] text-left flex items-center justify-between text-xs sm:text-sm font-semibold text-white hover:border-[#22c55e] focus:outline-none focus:ring-2 focus:ring-[#22c55e] transition min-h-[44px]"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
@@ -106,7 +106,7 @@ export const CropSelect: React.FC<CropSelectProps> = ({
           </span>
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-gray-400 transition-transform ${
+          className={`w-4 h-4 text-emerald-400 transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -115,17 +115,17 @@ export const CropSelect: React.FC<CropSelectProps> = ({
       {/* Combobox Dropdown Popover */}
       {isOpen && (
         <div className="relative z-30">
-          <div className="absolute top-1 left-0 right-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl p-2 space-y-2 max-h-72 flex flex-col animate-in fade-in zoom-in-95 duration-150">
+          <div className="absolute top-1 left-0 right-0 bg-[#0a2215] border border-[#1b4d32] rounded-2xl shadow-2xl p-2 space-y-2 max-h-72 flex flex-col animate-in fade-in zoom-in-95 duration-150">
             {/* Search Input */}
             <div className="relative">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400" />
               <input
                 ref={searchInputRef}
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={t("cropSelect.searchPlaceholder")}
-                className="w-full pl-9 pr-3 py-2 rounded-xl text-xs font-medium border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#22c55e]"
+                className="w-full pl-9 pr-3 py-2 rounded-xl text-xs font-medium border border-[#1b4d32] bg-[#05140a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#22c55e]"
               />
             </div>
 
@@ -141,15 +141,15 @@ export const CropSelect: React.FC<CropSelectProps> = ({
                 }}
                 className={`w-full py-2 px-3 rounded-lg text-left text-xs font-semibold flex items-center justify-between transition min-h-[38px] ${
                   selectedCrop === "all"
-                    ? "bg-emerald-50 dark:bg-emerald-950/50 text-[#16a34a] dark:text-[#4ade80]"
-                    : "hover:bg-gray-100 dark:hover:bg-gray-700/60 text-gray-800 dark:text-gray-200"
+                    ? "bg-[#143d26] text-[#4ade80] border border-[#235f3d]"
+                    : "hover:bg-[#113521] text-gray-200"
                 }`}
               >
                 <span className="flex items-center space-x-2">
                   <span>🔍</span>
                   <span>{t("cropSelect.autoDetect")}</span>
                 </span>
-                {selectedCrop === "all" && <Check className="w-3.5 h-3.5" />}
+                {selectedCrop === "all" && <Check className="w-3.5 h-3.5 text-[#22c55e]" />}
               </button>
 
               {/* Crop Items */}
@@ -167,20 +167,20 @@ export const CropSelect: React.FC<CropSelectProps> = ({
                       }}
                       className={`w-full py-2 px-3 rounded-lg text-left text-xs font-medium flex items-center justify-between transition min-h-[38px] ${
                         isSelected
-                          ? "bg-emerald-50 dark:bg-emerald-950/50 text-[#16a34a] dark:text-[#4ade80] font-bold"
-                          : "hover:bg-gray-100 dark:hover:bg-gray-700/60 text-gray-800 dark:text-gray-200"
+                          ? "bg-[#143d26] text-[#4ade80] font-bold border border-[#235f3d]"
+                          : "hover:bg-[#113521] text-gray-200"
                       }`}
                     >
                       <span className="flex items-center space-x-2 truncate">
                         <span>{crop.emoji}</span>
-                        <span className="font-semibold text-gray-900 dark:text-white">
+                        <span className="font-semibold text-white">
                           {crop.name}
                         </span>
-                        <span className="text-gray-500 dark:text-gray-400 text-[11px]">
+                        <span className="text-emerald-400/80 text-[11px]">
                           ({crop.hindi})
                         </span>
                       </span>
-                      {isSelected && <Check className="w-3.5 h-3.5" />}
+                      {isSelected && <Check className="w-3.5 h-3.5 text-[#22c55e]" />}
                     </button>
                   );
                 })

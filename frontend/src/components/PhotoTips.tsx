@@ -30,35 +30,35 @@ export const PhotoTips: React.FC = () => {
   ];
 
   return (
-    <div className="w-full max-w-xl mx-auto rounded-2xl bg-white/60 dark:bg-[#0c2417]/60 border border-gray-200 dark:border-[#1b4d32] overflow-hidden transition shadow-sm">
+    <div className="w-full max-w-xl mx-auto rounded-2xl bg-[#0c2417] border border-[#1b4d32] overflow-hidden transition shadow-sm">
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full p-3.5 flex items-center justify-between text-left text-xs font-bold text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-[#143d26] transition min-h-[44px]"
+        className="w-full p-3.5 flex items-center justify-between text-left text-xs font-bold text-white hover:bg-[#143d26] transition min-h-[44px]"
       >
         <span className="flex items-center space-x-2">
           <span>💡</span>
           <span>{t("tips.title")}</span>
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-gray-400 transition-transform ${
+          className={`w-4 h-4 text-emerald-400 transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
         />
       </button>
 
       {isOpen && (
-        <div className="p-4 border-t border-gray-100 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 gap-3 animate-in fade-in duration-200">
+        <div className="p-4 border-t border-[#1b4d32] grid grid-cols-1 sm:grid-cols-2 gap-3 animate-in fade-in duration-200">
           {tips.map((tip, idx) => (
             <div
               key={idx}
-              className="p-3 rounded-xl bg-gray-50 dark:bg-gray-900/40 border border-gray-100 dark:border-gray-800/80 space-y-1"
+              className="p-3 rounded-xl bg-[#081e13] border border-[#1b4d32] space-y-1"
             >
-              <div className="flex items-center space-x-1.5 font-bold text-xs text-gray-900 dark:text-white">
+              <div className="flex items-center space-x-1.5 font-bold text-xs text-white">
                 {tip.icon}
                 <span>{tip.title}</span>
               </div>
-              <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-[11px] text-emerald-300/80 leading-relaxed">
                 {tip.desc}
               </p>
             </div>

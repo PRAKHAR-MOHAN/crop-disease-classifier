@@ -75,15 +75,15 @@ ${farmersAdvice || ""}
   };
 
   return (
-    <div className="bg-white dark:bg-[#0c2417] border border-gray-200 dark:border-[#1b4d32] rounded-3xl p-6 shadow-xl space-y-5 print:shadow-none print:border-none">
+    <div className="bg-[#0c2417] border border-[#1b4d32] rounded-3xl p-6 shadow-xl space-y-5 print:shadow-none print:border-none">
       {/* Header & Quick Action Buttons */}
-      <div className="flex items-center justify-between flex-wrap gap-3 border-b border-gray-100 dark:border-gray-800 pb-4">
+      <div className="flex items-center justify-between flex-wrap gap-3 border-b border-[#1b4d32] pb-4">
         <div>
-          <h3 className="text-base font-extrabold text-gray-900 dark:text-white flex items-center space-x-2">
+          <h3 className="text-base font-extrabold text-white flex items-center space-x-2">
             <span>📋</span>
             <span>{t("advice.title")}</span>
           </h3>
-          <p className="text-[11px] text-gray-500 dark:text-emerald-300/70">
+          <p className="text-[11px] text-emerald-300/80">
             {cropDisplayName} &bull; Agronomic Management Protocol
           </p>
         </div>
@@ -93,30 +93,30 @@ ${farmersAdvice || ""}
           <button
             type="button"
             onClick={handleCopy}
-            className="p-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center space-x-1 transition min-h-[36px]"
+            className="p-2 rounded-xl text-xs font-semibold bg-[#143d26] hover:bg-[#1c5234] text-emerald-200 border border-[#235f3d] flex items-center space-x-1 transition min-h-[36px]"
             title={t("result.copyAdvice")}
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-[#22c55e]" /> : <Copy className="w-3.5 h-3.5 text-emerald-300" />}
             <span className="hidden sm:inline">{copied ? t("result.copied") : t("result.copyAdvice")}</span>
           </button>
 
           <button
             type="button"
             onClick={handleShare}
-            className="p-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center space-x-1 transition min-h-[36px]"
+            className="p-2 rounded-xl text-xs font-semibold bg-[#143d26] hover:bg-[#1c5234] text-emerald-200 border border-[#235f3d] flex items-center space-x-1 transition min-h-[36px]"
             title={t("result.share")}
           >
-            <Share2 className="w-3.5 h-3.5" />
+            <Share2 className="w-3.5 h-3.5 text-emerald-300" />
             <span className="hidden sm:inline">{t("result.share")}</span>
           </button>
 
           <button
             type="button"
             onClick={handlePrint}
-            className="p-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center space-x-1 transition min-h-[36px]"
+            className="p-2 rounded-xl text-xs font-semibold bg-[#143d26] hover:bg-[#1c5234] text-emerald-200 border border-[#235f3d] flex items-center space-x-1 transition min-h-[36px]"
             title={t("result.downloadReport")}
           >
-            <Printer className="w-3.5 h-3.5" />
+            <Printer className="w-3.5 h-3.5 text-emerald-300" />
             <span className="hidden sm:inline">{t("result.downloadReport")}</span>
           </button>
         </div>
@@ -130,7 +130,7 @@ ${farmersAdvice || ""}
           className={`py-2 px-3.5 rounded-xl text-xs font-bold whitespace-nowrap flex items-center space-x-1.5 transition min-h-[38px] ${
             activeTab === "symptoms"
               ? "bg-[#16a34a] text-white shadow-sm"
-              : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200"
+              : "bg-[#143d26] text-emerald-200 hover:bg-[#1c5234] border border-[#235f3d]"
           }`}
         >
           <Stethoscope className="w-3.5 h-3.5" />
@@ -143,7 +143,7 @@ ${farmersAdvice || ""}
           className={`py-2 px-3.5 rounded-xl text-xs font-bold whitespace-nowrap flex items-center space-x-1.5 transition min-h-[38px] ${
             activeTab === "organic"
               ? "bg-[#16a34a] text-white shadow-sm"
-              : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200"
+              : "bg-[#143d26] text-emerald-200 hover:bg-[#1c5234] border border-[#235f3d]"
           }`}
         >
           <Sprout className="w-3.5 h-3.5" />
@@ -157,7 +157,7 @@ ${farmersAdvice || ""}
             className={`py-2 px-3.5 rounded-xl text-xs font-bold whitespace-nowrap flex items-center space-x-1.5 transition min-h-[38px] ${
               activeTab === "chemical"
                 ? "bg-[#16a34a] text-white shadow-sm"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200"
+                : "bg-[#143d26] text-emerald-200 hover:bg-[#1c5234] border border-[#235f3d]"
             }`}
           >
             <FlaskConical className="w-3.5 h-3.5" />
@@ -171,7 +171,7 @@ ${farmersAdvice || ""}
           className={`py-2 px-3.5 rounded-xl text-xs font-bold whitespace-nowrap flex items-center space-x-1.5 transition min-h-[38px] ${
             activeTab === "prevention"
               ? "bg-[#16a34a] text-white shadow-sm"
-              : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200"
+              : "bg-[#143d26] text-emerald-200 hover:bg-[#1c5234] border border-[#235f3d]"
           }`}
         >
           <Shield className="w-3.5 h-3.5" />
@@ -184,11 +184,11 @@ ${farmersAdvice || ""}
         {/* Symptoms */}
         {(activeTab === "symptoms" || typeof window !== "undefined") && (
           <div className={activeTab === "symptoms" ? "block space-y-2" : "hidden print:block space-y-2"}>
-            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-[#059669]">
+            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-[#22c55e]">
               <Stethoscope className="w-4 h-4" />
               <span>{t("advice.symptoms")}</span>
             </div>
-            <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed bg-gray-50 dark:bg-gray-900/40 p-4 rounded-2xl border border-gray-100 dark:border-gray-800">
+            <p className="text-xs sm:text-sm text-gray-200 leading-relaxed bg-[#081e13] p-4 rounded-2xl border border-[#1b4d32]">
               {advice.symptoms}
             </p>
           </div>
@@ -197,20 +197,20 @@ ${farmersAdvice || ""}
         {/* Organic */}
         {(activeTab === "organic" || typeof window !== "undefined") && (
           <div className={activeTab === "organic" ? "block space-y-2" : "hidden print:block space-y-2"}>
-            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-[#059669]">
+            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-[#22c55e]">
               <Sprout className="w-4 h-4" />
               <span>{t("advice.organic")}</span>
             </div>
-            <ul className="space-y-2 bg-emerald-50/60 dark:bg-emerald-950/20 p-4 rounded-2xl border border-emerald-100 dark:border-emerald-900/50">
+            <ul className="space-y-2 bg-[#081e13] p-4 rounded-2xl border border-[#1b4d32]">
               {advice.organic_treatment && advice.organic_treatment.length > 0 ? (
                 advice.organic_treatment.map((item, idx) => (
-                  <li key={idx} className="flex items-start space-x-2 text-xs sm:text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                    <span className="text-[#16a34a] font-bold text-sm leading-none mt-0.5">•</span>
+                  <li key={idx} className="flex items-start space-x-2 text-xs sm:text-sm text-gray-200 leading-relaxed">
+                    <span className="text-[#22c55e] font-bold text-sm leading-none mt-0.5">•</span>
                     <span>{item}</span>
                   </li>
                 ))
               ) : (
-                <li className="text-xs text-gray-600 dark:text-gray-400">
+                <li className="text-xs text-gray-400">
                   No curative organic sprays needed for this condition.
                 </li>
               )}
@@ -221,20 +221,20 @@ ${farmersAdvice || ""}
         {/* Chemical */}
         {!isHealthy && (activeTab === "chemical" || typeof window !== "undefined") && (
           <div className={activeTab === "chemical" ? "block space-y-2" : "hidden print:block space-y-2"}>
-            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400">
+            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-amber-400">
               <FlaskConical className="w-4 h-4" />
               <span>{t("advice.chemical")}</span>
             </div>
-            <ul className="space-y-2 bg-amber-50/60 dark:bg-amber-950/20 p-4 rounded-2xl border border-amber-100 dark:border-amber-900/50">
+            <ul className="space-y-2 bg-[#081e13] p-4 rounded-2xl border border-[#1b4d32]">
               {advice.chemical_treatment && advice.chemical_treatment.length > 0 ? (
                 advice.chemical_treatment.map((item, idx) => (
-                  <li key={idx} className="flex items-start space-x-2 text-xs sm:text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                    <span className="text-amber-600 font-bold text-sm leading-none mt-0.5">•</span>
+                  <li key={idx} className="flex items-start space-x-2 text-xs sm:text-sm text-gray-200 leading-relaxed">
+                    <span className="text-amber-400 font-bold text-sm leading-none mt-0.5">•</span>
                     <span>{item}</span>
                   </li>
                 ))
               ) : (
-                <li className="text-xs text-gray-600 dark:text-gray-400">
+                <li className="text-xs text-gray-400">
                   Consult regional extension officer for local label approvals.
                 </li>
               )}
@@ -245,20 +245,20 @@ ${farmersAdvice || ""}
         {/* Prevention */}
         {(activeTab === "prevention" || typeof window !== "undefined") && (
           <div className={activeTab === "prevention" ? "block space-y-2" : "hidden print:block space-y-2"}>
-            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-400">
+            <div className="flex items-center space-x-1.5 text-xs font-black uppercase tracking-wider text-emerald-400">
               <Shield className="w-4 h-4" />
               <span>{t("advice.prevention")}</span>
             </div>
-            <ul className="space-y-2 bg-blue-50/60 dark:bg-blue-950/20 p-4 rounded-2xl border border-blue-100 dark:border-blue-900/50">
+            <ul className="space-y-2 bg-[#081e13] p-4 rounded-2xl border border-[#1b4d32]">
               {advice.prevention && advice.prevention.length > 0 ? (
                 advice.prevention.map((item, idx) => (
-                  <li key={idx} className="flex items-start space-x-2 text-xs sm:text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                    <span className="text-blue-500 font-bold text-sm leading-none mt-0.5">✅</span>
+                  <li key={idx} className="flex items-start space-x-2 text-xs sm:text-sm text-gray-200 leading-relaxed">
+                    <span className="text-[#22c55e] font-bold text-sm leading-none mt-0.5">✅</span>
                     <span>{item}</span>
                   </li>
                 ))
               ) : (
-                <li className="text-xs text-gray-600 dark:text-gray-400">
+                <li className="text-xs text-gray-400">
                   Maintain standard sanitation and crop rotation.
                 </li>
               )}
@@ -268,12 +268,12 @@ ${farmersAdvice || ""}
 
         {/* Farmer's Advice highlight card */}
         {farmersAdvice && (
-          <div className="p-4 rounded-2xl bg-[#fffbeb] dark:bg-amber-950/30 border border-[#fef3c7] dark:border-amber-900/60 space-y-1.5">
-            <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-[#b45309] dark:text-amber-400">
+          <div className="p-4 rounded-2xl bg-[#0e2c1c] border border-[#235f3d] space-y-1.5">
+            <div className="flex items-center space-x-2 text-xs font-black uppercase tracking-wider text-amber-300">
               <span>🧑‍🌾</span>
               <span>{t("advice.farmersAdvice")}</span>
             </div>
-            <p className="text-xs sm:text-sm text-[#92400e] dark:text-amber-200 leading-relaxed font-medium">
+            <p className="text-xs sm:text-sm text-emerald-100 leading-relaxed font-medium">
               {farmersAdvice}
             </p>
           </div>
@@ -281,7 +281,7 @@ ${farmersAdvice || ""}
       </div>
 
       {/* Extension Disclaimer */}
-      <p className="text-[11px] text-gray-400 dark:text-gray-500 italic pt-2 border-t border-gray-100 dark:border-gray-800">
+      <p className="text-[11px] text-emerald-400/70 italic pt-2 border-t border-[#1b4d32]">
         ⚠️ {t("advice.disclaimer")}
       </p>
     </div>
