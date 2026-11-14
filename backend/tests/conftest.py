@@ -176,7 +176,11 @@ def _setup_test_artifacts():
 
     yield
 
-    _tmp_dir_obj.cleanup()
+    engine.dispose()
+    try:
+        _tmp_dir_obj.cleanup()
+    except PermissionError:
+        pass
 
 
 @pytest.fixture()

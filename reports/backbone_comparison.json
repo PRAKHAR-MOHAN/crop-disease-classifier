@@ -1,0 +1,22 @@
+{
+  "runs": [
+    {
+      "experiment_name": "efficientnetv2_s",
+      "backbone": "tf_efficientnetv2_s.in21k_ft_in1k",
+      "best_epoch": 20,
+      "best_val_macro_f1": 0.997896,
+      "best_val_acc": 0.998773,
+      "checkpoint_path": "artifacts/runs/efficientnetv2_s/best.pt",
+      "duration_sec": 4680.13
+    }
+  ],
+  "winner": {
+    "experiment_name": "efficientnetv2_s",
+    "backbone": "tf_efficientnetv2_s.in21k_ft_in1k",
+    "best_epoch": 20,
+    "best_val_macro_f1": 0.997896,
+    "best_val_acc": 0.998773,
+    "checkpoint_path": "artifacts/runs/efficientnetv2_s/best.pt",
+    "duration_sec": 4680.13
+  }
+}

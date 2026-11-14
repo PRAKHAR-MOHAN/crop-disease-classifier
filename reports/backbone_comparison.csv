@@ -1,0 +1,2 @@
+experiment_name,backbone,best_epoch,best_val_macro_f1,best_val_acc,checkpoint_path,duration_sec
+efficientnetv2_s,tf_efficientnetv2_s.in21k_ft_in1k,20,0.997896,0.998773,artifacts/runs/efficientnetv2_s/best.pt,4680.13

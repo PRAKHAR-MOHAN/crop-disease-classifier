@@ -1,0 +1,21 @@
+{
+  "backbone": "tf_efficientnetv2_s.in21k_ft_in1k",
+  "temperature": 0.547371,
+  "calibration": {
+    "temperature": 0.547371,
+    "nll_before": 0.139808,
+    "nll_after": 0.007133,
+    "ece_before": 0.126467,
+    "ece_after": 0.001407
+  },
+  "ood": {
+    "has_ood_eval": true,
+    "confidence_threshold": 0.8,
+    "energy_threshold": -5.7724,
+    "conf_auroc": 0.9933,
+    "conf_fpr_at_95tpr": 0.0193,
+    "energy_auroc": 0.9901,
+    "energy_fpr_at_95tpr": 0.038
+  },
+  "gradcam_pytorch_vs_cam_corr": 1.0
+}

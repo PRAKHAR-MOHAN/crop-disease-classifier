@@ -1,0 +1,4 @@
+{
+  "val_auc": 1.0,
+  "onnx_path": "artifacts/plant_gate.onnx"
+}

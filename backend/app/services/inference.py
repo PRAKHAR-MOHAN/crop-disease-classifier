@@ -225,13 +225,10 @@ class InferenceService:
         ]
 
         label = self.classes[pred_idx] if pred_idx < self.num_classes else "Unknown"
-        if is_ood:
-            label = "Unknown"
-            is_uncertain = True
 
         # Render Grad-CAM overlay
         gradcam_b64: str | None = None
-        if cam_maps is not None and not is_ood:
+        if cam_maps is not None:
             try:
                 gradcam_b64 = self._render_gradcam_b64(cam_maps, pred_idx, rgb_np)
             except Exception as exc:

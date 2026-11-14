@@ -1,0 +1,24 @@
+{
+  "onnx_path": "artifacts/model.onnx",
+  "backbone": "tf_efficientnetv2_s.in21k_ft_in1k",
+  "image_size": 224,
+  "threads": 4,
+  "includes_plant_gate": true,
+  "runs": 80,
+  "mean_ms": 111.09,
+  "p50_ms": 108.33,
+  "p95_ms": 144.21,
+  "p99_ms": 155.75,
+  "target_under_300ms": true,
+  "parity": {
+    "logits_max_abs_diff": 2e-06,
+    "logits_cosine_sim": 1.0,
+    "cam_max_abs_diff": 1e-05,
+    "cam_shape": [
+      1,
+      38,
+      7,
+      7
+    ]
+  }
+}

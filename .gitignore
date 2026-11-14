@@ -38,6 +38,7 @@ optuna.db
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
+*.tsbuildinfo
 
 # OS / IDE
 .DS_Store
