@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Sidebar, NavTab } from "../components/Sidebar";
 import { TopHeader } from "../components/TopHeader";
-import { StationOverview } from "../components/StationOverview";
+import { CropDiseaseDashboard } from "../components/CropDiseaseDashboard";
 import { DiagnosticView } from "../components/DiagnosticView";
-import { FieldStationsView } from "../components/FieldStationsView";
+import { CropFieldPlotsView } from "../components/CropFieldPlotsView";
 import { DiseaseAlertsView } from "../components/DiseaseAlertsView";
 import { PathogenLibraryView } from "../components/PathogenLibraryView";
 import { ScanHistoryView } from "../components/ScanHistoryView";
 import { StationConfigView } from "../components/StationConfigView";
 import { AuthModal, UserSession } from "../components/AuthModal";
-import { STATIONS, StationInfo, RECENT_ALERTS } from "../data/stationData";
+import { CROP_ZONES, CropZone, RECENT_DISEASE_INCIDENTS } from "../data/cropDiseaseData";
 import { usePredictMutation, useHealthQuery } from "../api/hooks";
 import { PredictionResponse, HistoryItem } from "../api/types";
 
@@ -29,9 +29,9 @@ const MAX_HISTORY = 15;
 const CropGuardMain: React.FC = () => {
   const { t } = useTranslation();
 
-  // Navigation and Station Selection State
+  // Navigation and Crop Zone Selection State
   const [currentTab, setCurrentTab] = useState<NavTab>("overview");
-  const [selectedStation, setSelectedStation] = useState<StationInfo>(STATIONS[0]);
+  const [selectedZone, setSelectedZone] = useState<CropZone>(CROP_ZONES[0]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
@@ -68,11 +68,11 @@ const CropGuardMain: React.FC = () => {
   const predictMutation = usePredictMutation();
   const healthQuery = useHealthQuery();
 
-  // Lock dark palette to document element
+  // Enforce deep dark background on root
   useEffect(() => {
     document.documentElement.classList.add("dark");
-    document.documentElement.style.backgroundColor = "#070e19";
-    document.body.style.backgroundColor = "#070e19";
+    document.documentElement.style.backgroundColor = "#06101c";
+    document.body.style.backgroundColor = "#06101c";
   }, []);
 
   const handleLogin = (session: UserSession) => {
@@ -177,49 +177,49 @@ const CropGuardMain: React.FC = () => {
     }
   };
 
-  // Tab Title & Subtitle Mapping
+  // 100% Crop Disease Focused Metadata
   const tabMetadata: Record<NavTab, { title: string; subtitle: string }> = {
     overview: {
-      title: "Station Intelligence",
-      subtitle: "Monitor foliar telemetry, canopy microclimates, and evaluate crop disease risk index.",
+      title: "Disease Intelligence & Foliar Health",
+      subtitle: "Comprehensive plant pathology monitoring, fungal spread rates, and live canopy risk index.",
     },
     diagnostic: {
       title: "Leaf Diagnostic & Neural Classifier",
-      subtitle: "High-precision AI foliar pathology screening with calibrated temperature scaling and Grad-CAM.",
+      subtitle: "High-precision foliar pathology detection with calibrated temperature scaling and Grad-CAM explainability.",
     },
     stations: {
-      title: "Field Stations & Sensor Mesh",
-      subtitle: "Active telemetry pods distributed across agricultural plots and polyhouses.",
+      title: "Crop Field Plots & Sectors",
+      subtitle: "Agricultural plots monitored for foliar disease outbreaks and pathogen pressures.",
     },
     alerts: {
-      title: "Disease Anomaly & Outbreak Feed",
-      subtitle: "Live feed of detected fungal, bacterial, and viral crop pathologies.",
+      title: "Pathogen Anomaly & Outbreak Feed",
+      subtitle: "Active crop disease incidents identified by computer vision and foliar risk models.",
     },
     analytics: {
-      title: "Microclimate & Spore Analytics",
-      subtitle: "Multi-axis time-series correlating foliar wetness and temperature with pathogen pressure.",
+      title: "Pathogen Infection Spread Trends",
+      subtitle: "Historical disease progression: fungal blights, bacterial spots, and viral leaf infections.",
     },
     library: {
-      title: "Pathogen Encyclopedia",
-      subtitle: "Clinical pathology profiles, Latin taxon references, and agronomic treatment guides.",
+      title: "Agronomic Pathogen Encyclopedia",
+      subtitle: "Diagnostic profiles, Latin causal taxa, and organic & chemical treatment guides for 38 diseases.",
     },
     history: {
-      title: "Field Diagnostic Audit Logs",
-      subtitle: "Complete archive of scanned crop samples, confidence scores, and action plans.",
+      title: "Diagnostic Audit Logs",
+      subtitle: "Complete archive of scanned crop leaves, calibrated confidence ratings, and prescriptions.",
     },
     settings: {
-      title: "Station & Inference Configuration",
-      subtitle: "Telemetry poll frequencies, model uncertainty thresholds, and alert dispatches.",
+      title: "AI Inference & Threshold Calibration",
+      subtitle: "Tune confidence rejection cutoffs, spore incubation sensitivity, and edge device syncing.",
     },
   };
 
   return (
-    <div className="min-h-screen bg-[#070e19] text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 flex">
+    <div className="min-h-screen bg-[#06101c] text-slate-100 font-sans selection:bg-[#22c55e] selection:text-slate-950 flex">
       {/* Sidebar Navigation */}
       <Sidebar
         currentTab={currentTab}
         onSelectTab={setCurrentTab}
-        alertCount={RECENT_ALERTS.length}
+        alertCount={RECENT_DISEASE_INCIDENTS.length}
         userSession={userSession}
         onOpenAuth={() => setIsAuthModalOpen(true)}
         onLogout={handleLogout}
@@ -233,10 +233,10 @@ const CropGuardMain: React.FC = () => {
         <TopHeader
           currentTabName={tabMetadata[currentTab].title}
           currentSubtitle={tabMetadata[currentTab].subtitle}
-          selectedStation={selectedStation}
-          onSelectStation={setSelectedStation}
+          selectedZone={selectedZone}
+          onSelectZone={setSelectedZone}
           onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
-          alertCount={RECENT_ALERTS.length}
+          alertCount={RECENT_DISEASE_INCIDENTS.length}
           onOpenAlerts={() => setCurrentTab("alerts")}
           userSession={userSession}
           onOpenAuth={() => setIsAuthModalOpen(true)}
@@ -246,8 +246,9 @@ const CropGuardMain: React.FC = () => {
         {/* Tab View Routing */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           {currentTab === "overview" && (
-            <StationOverview
-              station={selectedStation}
+            <CropDiseaseDashboard
+              selectedZone={selectedZone}
+              onSelectZone={setSelectedZone}
               onNavigateToDiagnostic={() => setCurrentTab("diagnostic")}
             />
           )}
@@ -275,9 +276,9 @@ const CropGuardMain: React.FC = () => {
           )}
 
           {currentTab === "stations" && (
-            <FieldStationsView
-              selectedStation={selectedStation}
-              onSelectStation={setSelectedStation}
+            <CropFieldPlotsView
+              selectedZone={selectedZone}
+              onSelectZone={setSelectedZone}
               onNavigateToDiagnostic={() => setCurrentTab("diagnostic")}
             />
           )}
@@ -289,8 +290,9 @@ const CropGuardMain: React.FC = () => {
           )}
 
           {currentTab === "analytics" && (
-            <StationOverview
-              station={selectedStation}
+            <CropDiseaseDashboard
+              selectedZone={selectedZone}
+              onSelectZone={setSelectedZone}
               onNavigateToDiagnostic={() => setCurrentTab("diagnostic")}
             />
           )}
@@ -314,7 +316,6 @@ const CropGuardMain: React.FC = () => {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         onLogin={handleLogin}
-        currentUser={userSession}
       />
     </div>
   );
