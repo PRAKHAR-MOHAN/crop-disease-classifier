@@ -1,12 +1,7 @@
-const CACHE_NAME = "cropai-v1";
-const STATIC_ASSETS = ["/", "/index.html", "/manifest.json"];
+// CropAI Service Worker — Network-First Strategy to ensure immediate updates
+const CACHE_NAME = "cropguard-v2";
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS).catch(() => {});
-    })
-  );
   self.skipWaiting();
 });
 
@@ -20,32 +15,29 @@ self.addEventListener("activate", (event) => {
           }
         })
       )
-    )
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
-  // Only cache GET requests for static assets, never API POST /predict
+  // Never intercept API calls or non-GET requests
   if (event.request.method !== "GET" || event.request.url.includes("/api/")) {
     return;
   }
 
+  // Network-First: Always fetch the fresh bundle from server first
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return (
-        cached ||
-        fetch(event.request)
-          .then((response) => {
-            if (response.status === 200) {
-              const clone = response.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-            }
-            return response;
-          })
-          .catch(() => cached)
-      );
-    })
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return networkResponse;
+      })
+      .catch(() => {
+        // Fall back to cache only when truly offline
+        return caches.match(event.request);
+      })
   );
 });
-
