@@ -279,11 +279,6 @@ ${farmersAdvice || ""}
           </div>
         )}
       </div>
-
-      {/* Extension Disclaimer */}
-      <p className="text-[11px] text-emerald-400/70 italic pt-2 border-t border-[#1b4d32]">
-        ⚠️ {t("advice.disclaimer")}
-      </p>
     </div>
   );
 };

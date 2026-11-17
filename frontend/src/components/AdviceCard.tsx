@@ -141,11 +141,6 @@ export const AdviceCard: React.FC<AdviceCardProps> = ({ advice, isHealthy }) => 
           </ul>
         </div>
       )}
-
-      {/* Extension Disclaimer */}
-      <div className="p-3 rounded-xl bg-gray-50/60 dark:bg-gray-800/20 border border-gray-100 dark:border-gray-800 text-[11px] text-gray-500 dark:text-gray-400 italic leading-relaxed">
-        ⚠️ {t("advice.disclaimer")}
-      </div>
     </div>
   );
 };

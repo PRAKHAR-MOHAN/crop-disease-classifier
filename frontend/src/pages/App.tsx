@@ -195,10 +195,6 @@ const CropGuardMain: React.FC = () => {
       title: "Pathogen Anomaly & Outbreak Feed",
       subtitle: "Active crop disease incidents identified by computer vision and foliar risk models.",
     },
-    analytics: {
-      title: "Pathogen Infection Spread Trends",
-      subtitle: "Historical disease progression: fungal blights, bacterial spots, and viral leaf infections.",
-    },
     library: {
       title: "Agronomic Pathogen Encyclopedia",
       subtitle: "Diagnostic profiles, Latin causal taxa, and organic & chemical treatment guides for 38 diseases.",
@@ -286,14 +282,6 @@ const CropGuardMain: React.FC = () => {
           {currentTab === "alerts" && (
             <DiseaseAlertsView
               onDiagnoseClass={() => setCurrentTab("diagnostic")}
-            />
-          )}
-
-          {currentTab === "analytics" && (
-            <CropDiseaseDashboard
-              selectedZone={selectedZone}
-              onSelectZone={setSelectedZone}
-              onNavigateToDiagnostic={() => setCurrentTab("diagnostic")}
             />
           )}
 

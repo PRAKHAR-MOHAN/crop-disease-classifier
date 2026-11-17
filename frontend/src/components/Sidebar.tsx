@@ -3,7 +3,6 @@ import {
   LayoutDashboard,
   Sprout,
   AlertCircle,
-  TrendingUp,
   BookOpen,
   History,
   Settings,
@@ -19,7 +18,6 @@ export type NavTab =
   | "diagnostic"
   | "stations"
   | "alerts"
-  | "analytics"
   | "library"
   | "history"
   | "settings";
@@ -66,11 +64,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: "Outbreak Alerts",
       icon: <AlertCircle className="w-4 h-4 text-amber-400" />,
       badge: alertCount,
-    },
-    {
-      id: "analytics",
-      label: "Pathogen Trends",
-      icon: <TrendingUp className="w-4 h-4" />,
     },
     {
       id: "library",
