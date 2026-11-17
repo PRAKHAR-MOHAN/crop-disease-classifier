@@ -12,12 +12,23 @@ export function useDarkMode() {
 
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
     if (theme === "dark") {
       root.classList.add("dark");
       root.classList.remove("light");
+      root.style.backgroundColor = "#04110a";
+      root.style.colorScheme = "dark";
+      if (body) {
+        body.style.backgroundColor = "#04110a";
+      }
     } else {
       root.classList.remove("dark");
       root.classList.add("light");
+      root.style.backgroundColor = "#f8fafc";
+      root.style.colorScheme = "light";
+      if (body) {
+        body.style.backgroundColor = "#f8fafc";
+      }
     }
     localStorage.setItem("cropai_theme", theme);
   }, [theme]);

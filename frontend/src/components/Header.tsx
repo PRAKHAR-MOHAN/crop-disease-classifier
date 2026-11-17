@@ -92,7 +92,7 @@ export const Header: React.FC<HeaderProps> = ({
             <select
               value={i18n.resolvedLanguage || "en"}
               onChange={handleLangChange}
-              className="py-2 px-2.5 rounded-xl border border-gray-200 dark:border-[#1b4d32] bg-white dark:bg-[#0c2417] text-gray-800 dark:text-gray-100 text-xs font-bold cursor-pointer shadow-sm focus:ring-2 focus:ring-[#22c55e] min-h-[44px]"
+              className="py-2 px-2.5 rounded-xl border border-[#1b4d32] bg-[#0c2417] text-gray-100 text-xs font-bold cursor-pointer shadow-sm focus:ring-2 focus:ring-[#22c55e] min-h-[44px]"
               aria-label={t("nav.language")}
             >
               <option value="en">🇺🇸 EN</option>
@@ -105,14 +105,14 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onToggleTheme}
-            className="p-2 rounded-xl border border-gray-200 dark:border-[#1b4d32] bg-white dark:bg-[#0c2417] text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#143d26] transition active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 rounded-xl border border-[#1b4d32] bg-[#0c2417] text-gray-200 hover:bg-[#143d26] transition active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label={isDark ? t("nav.lightMode") : t("nav.darkMode")}
-            title={isDark ? t("nav.lightMode") : t("nav.darkMode")}
+            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
           >
             {isDark ? (
               <Sun className="w-4 h-4 text-amber-400" />
             ) : (
-              <Moon className="w-4 h-4 text-gray-600" />
+              <Moon className="w-4 h-4 text-emerald-300" />
             )}
           </button>
         </div>
