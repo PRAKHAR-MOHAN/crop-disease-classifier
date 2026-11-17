@@ -1,22 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Header } from "@/components/Header";
-import { UploadCard } from "@/components/UploadCard";
-import { ResultCard } from "@/components/ResultCard";
-import { GradCamViewer } from "@/components/GradCamViewer";
-import { AdvicePanel } from "@/components/AdvicePanel";
-import { FeedbackBox } from "@/components/FeedbackBox";
-import { HistoryDrawer } from "@/components/HistoryDrawer";
-import { PhotoTips } from "@/components/PhotoTips";
-import { ErrorState } from "@/components/ErrorState";
-import { ResultSkeleton } from "@/components/Skeletons";
-import { StickyBottomBar } from "@/components/StickyBottomBar";
-import { useDarkMode } from "@/hooks/useDarkMode";
-import { usePredictMutation } from "@/api/hooks";
-import { PredictionResponse, HistoryItem } from "@/api/types";
-import { parseClassName } from "@/lib/parseClassName";
-import { PATHOGEN_DETAILS } from "@/data/cropKnowledge";
+import { Sidebar, NavTab } from "../components/Sidebar";
+import { TopHeader } from "../components/TopHeader";
+import { StationOverview } from "../components/StationOverview";
+import { DiagnosticView } from "../components/DiagnosticView";
+import { FieldStationsView } from "../components/FieldStationsView";
+import { DiseaseAlertsView } from "../components/DiseaseAlertsView";
+import { PathogenLibraryView } from "../components/PathogenLibraryView";
+import { ScanHistoryView } from "../components/ScanHistoryView";
+import { StationConfigView } from "../components/StationConfigView";
+import { AuthModal, UserSession } from "../components/AuthModal";
+import { STATIONS, StationInfo, RECENT_ALERTS } from "../data/stationData";
+import { usePredictMutation, useHealthQuery } from "../api/hooks";
+import { PredictionResponse, HistoryItem } from "../api/types";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,20 +24,36 @@ const queryClient = new QueryClient({
   },
 });
 
-const MAX_HISTORY = 10;
+const MAX_HISTORY = 15;
 
-const CropAiApp: React.FC = () => {
+const CropGuardMain: React.FC = () => {
   const { t } = useTranslation();
-  const { isDark, toggle: toggleTheme } = useDarkMode();
 
+  // Navigation and Station Selection State
+  const [currentTab, setCurrentTab] = useState<NavTab>("overview");
+  const [selectedStation, setSelectedStation] = useState<StationInfo>(STATIONS[0]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  // User session state
+  const [userSession, setUserSession] = useState<UserSession | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const stored = localStorage.getItem("cropguard_user");
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  // Diagnostic / Classifier State
   const [selectedCrop, setSelectedCrop] = useState<string>("all");
   const [selectedFile, setSelectedFile] = useState<File | Blob | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [currentPrediction, setCurrentPrediction] = useState<PredictionResponse | null>(null);
   const [clientError, setClientError] = useState<string | null>(null);
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
-  // Scan history stored in localStorage
+  // History State
   const [history, setHistory] = useState<HistoryItem[]>(() => {
     if (typeof window === "undefined") return [];
     try {
@@ -53,6 +66,28 @@ const CropAiApp: React.FC = () => {
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const predictMutation = usePredictMutation();
+  const healthQuery = useHealthQuery();
+
+  // Lock dark palette to document element
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+    document.documentElement.style.backgroundColor = "#070e19";
+    document.body.style.backgroundColor = "#070e19";
+  }, []);
+
+  const handleLogin = (session: UserSession) => {
+    setUserSession(session);
+    try {
+      localStorage.setItem("cropguard_user", JSON.stringify(session));
+    } catch {
+      // Storage error
+    }
+  };
+
+  const handleLogout = () => {
+    setUserSession(null);
+    localStorage.removeItem("cropguard_user");
+  };
 
   const handleFileSelect = (file: File | Blob) => {
     setSelectedFile(file);
@@ -85,7 +120,6 @@ const CropAiApp: React.FC = () => {
 
       setCurrentPrediction(result);
 
-      // Save to history with small thumbnail
       if (previewUrl) {
         const historyEntry: HistoryItem = {
           id: result.request_id || String(Date.now()),
@@ -110,7 +144,6 @@ const CropAiApp: React.FC = () => {
       if (err instanceof Error && err.name === "AbortError") {
         setClientError(t("errors.aborted"));
       }
-      // Mutation handles ApiError
     }
   };
 
@@ -121,16 +154,17 @@ const CropAiApp: React.FC = () => {
     }
   };
 
-  const handleReset = () => {
+  const handleResetDiagnostic = () => {
     handleClearFile();
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSelectHistory = (item: HistoryItem) => {
+  const handleSelectHistoryItem = (item: HistoryItem) => {
     setPreviewUrl(item.thumbnail);
     setCurrentPrediction(item.prediction);
     setSelectedFile(null);
     setClientError(null);
+    setCurrentTab("diagnostic");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -143,105 +177,83 @@ const CropAiApp: React.FC = () => {
     }
   };
 
-  const parsedCurrent = currentPrediction ? parseClassName(currentPrediction.label) : null;
-  const currentKnowledge = currentPrediction ? PATHOGEN_DETAILS[currentPrediction.label] : null;
+  // Tab Title & Subtitle Mapping
+  const tabMetadata: Record<NavTab, { title: string; subtitle: string }> = {
+    overview: {
+      title: "Station Intelligence",
+      subtitle: "Monitor foliar telemetry, canopy microclimates, and evaluate crop disease risk index.",
+    },
+    diagnostic: {
+      title: "Leaf Diagnostic & Neural Classifier",
+      subtitle: "High-precision AI foliar pathology screening with calibrated temperature scaling and Grad-CAM.",
+    },
+    stations: {
+      title: "Field Stations & Sensor Mesh",
+      subtitle: "Active telemetry pods distributed across agricultural plots and polyhouses.",
+    },
+    alerts: {
+      title: "Disease Anomaly & Outbreak Feed",
+      subtitle: "Live feed of detected fungal, bacterial, and viral crop pathologies.",
+    },
+    analytics: {
+      title: "Microclimate & Spore Analytics",
+      subtitle: "Multi-axis time-series correlating foliar wetness and temperature with pathogen pressure.",
+    },
+    library: {
+      title: "Pathogen Encyclopedia",
+      subtitle: "Clinical pathology profiles, Latin taxon references, and agronomic treatment guides.",
+    },
+    history: {
+      title: "Field Diagnostic Audit Logs",
+      subtitle: "Complete archive of scanned crop samples, confidence scores, and action plans.",
+    },
+    settings: {
+      title: "Station & Inference Configuration",
+      subtitle: "Telemetry poll frequencies, model uncertainty thresholds, and alert dispatches.",
+    },
+  };
 
   return (
-    <div className="min-h-screen w-full bg-[#04110a] dark:bg-[#04110a] bg-cropai-grid text-gray-100 flex flex-col justify-between font-sans selection:bg-[#22c55e] selection:text-black transition-colors">
-      {/* Header */}
-      <Header
-        isDark={isDark}
-        onToggleTheme={toggleTheme}
-        onOpenHistory={() => setIsHistoryOpen(true)}
-        historyCount={history.length}
+    <div className="min-h-screen bg-[#070e19] text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 flex">
+      {/* Sidebar Navigation */}
+      <Sidebar
+        currentTab={currentTab}
+        onSelectTab={setCurrentTab}
+        alertCount={RECENT_ALERTS.length}
+        userSession={userSession}
+        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onLogout={handleLogout}
+        isOpenMobile={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
-      {/* Main Content */}
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 py-5 sm:py-7 space-y-6">
-        {/* Compact Hero (Mobile-first, positioned to keep Upload Card above the fold) */}
-        {!currentPrediction && (
-          <div className="text-center space-y-3 pt-1 pb-1">
-            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-[#0c2417] text-[#22c55e] border border-[#1b4d32] shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
-              <span>{t("hero.liveBadge")}</span>
-            </div>
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0 lg:pl-64 transition-all">
+        {/* Top Header */}
+        <TopHeader
+          currentTabName={tabMetadata[currentTab].title}
+          currentSubtitle={tabMetadata[currentTab].subtitle}
+          selectedStation={selectedStation}
+          onSelectStation={setSelectedStation}
+          onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+          alertCount={RECENT_ALERTS.length}
+          onOpenAlerts={() => setCurrentTab("alerts")}
+          userSession={userSession}
+          onOpenAuth={() => setIsAuthModalOpen(true)}
+          backendOnline={Boolean(healthQuery.data?.model_loaded)}
+        />
 
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-[1.1] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              {t("hero.title1")} {t("hero.title2")}{" "}
-              <span className="text-[#22c55e] drop-shadow-[0_0_24px_rgba(34,197,94,0.6)]">
-                {t("hero.title3")}
-              </span>{" "}
-              {t("hero.title4")}
-            </h1>
-
-            <p className="text-xs sm:text-sm text-emerald-200/80 max-w-md mx-auto leading-relaxed drop-shadow-sm">
-              {t("hero.subtitle")}
-            </p>
-
-            {/* Feature Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 pt-1">
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
-                🤖 {t("hero.chipAi")}
-              </span>
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
-                ⚡ {t("hero.chipInstant")}
-              </span>
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
-                🟢 {t("hero.chipClasses")}
-              </span>
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#0c2417] border border-[#1b4d32] text-emerald-200 shadow-sm">
-                🆓 {t("hero.chipFree")}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {/* Error State Banner */}
-        {(predictMutation.error || clientError) && (
-          <ErrorState
-            error={predictMutation.error || new Error(clientError || "")}
-            onRetry={handleAnalyze}
-            onDismiss={() => {
-              setClientError(null);
-              predictMutation.reset();
-            }}
-          />
-        )}
-
-        {/* Upload Card or Skeletons or Results View */}
-        {predictMutation.isPending ? (
-          <ResultSkeleton />
-        ) : currentPrediction && previewUrl ? (
-          <div className="space-y-6 animate-in fade-in duration-300 pb-16 sm:pb-4">
-            {/* 1. Primary Result Diagnosis Card */}
-            <ResultCard
-              prediction={currentPrediction}
-              onReset={handleReset}
+        {/* Tab View Routing */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+          {currentTab === "overview" && (
+            <StationOverview
+              station={selectedStation}
+              onNavigateToDiagnostic={() => setCurrentTab("diagnostic")}
             />
+          )}
 
-            {/* 2. Visual Explainability (Grad-CAM) */}
-            <GradCamViewer
-              originalSrc={previewUrl}
-              gradcamBase64={currentPrediction.gradcam}
-            />
-
-            {/* 3. Agronomic Treatment Protocol */}
-            <AdvicePanel
-              advice={currentPrediction.advice}
-              cropDisplayName={parsedCurrent?.displayName || "Crop"}
-              isHealthy={parsedCurrent?.isHealthy || false}
-              farmersAdvice={currentKnowledge?.farmersAdvice}
-            />
-
-            {/* 4. Feedback Mechanism */}
-            <FeedbackBox
-              requestId={currentPrediction.request_id}
-              predictedLabel={currentPrediction.label}
-            />
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <UploadCard
+          {currentTab === "diagnostic" && (
+            <DiagnosticView
               selectedCrop={selectedCrop}
               onSelectCrop={setSelectedCrop}
               selectedFile={selectedFile}
@@ -251,41 +263,59 @@ const CropAiApp: React.FC = () => {
               onClearFile={handleClearFile}
               onAnalyze={handleAnalyze}
               onCancelAnalyze={handleCancelAnalyze}
-              onError={setClientError}
+              onError={(msg) => setClientError(msg)}
+              currentPrediction={currentPrediction}
+              onReset={handleResetDiagnostic}
+              error={predictMutation.error || (clientError ? new Error(clientError) : null)}
+              onDismissError={() => {
+                setClientError(null);
+                predictMutation.reset();
+              }}
             />
+          )}
 
-            {/* Photo taking tips accordion */}
-            <PhotoTips />
-          </div>
-        )}
-      </main>
+          {currentTab === "stations" && (
+            <FieldStationsView
+              selectedStation={selectedStation}
+              onSelectStation={setSelectedStation}
+              onNavigateToDiagnostic={() => setCurrentTab("diagnostic")}
+            />
+          )}
 
-      {/* Sticky Bottom Action Bar for Mobile Thumb Usage */}
-      {currentPrediction && (
-        <StickyBottomBar
-          onScanAnother={handleReset}
-          title={parsedCurrent?.displayName || "Crop Diagnosis"}
-        />
-      )}
+          {currentTab === "alerts" && (
+            <DiseaseAlertsView
+              onDiagnoseClass={() => setCurrentTab("diagnostic")}
+            />
+          )}
 
-      {/* Slide-over Scan History Drawer */}
-      <HistoryDrawer
-        isOpen={isHistoryOpen}
-        onClose={() => setIsHistoryOpen(false)}
-        history={history}
-        onSelect={handleSelectHistory}
-        onClear={handleClearHistory}
+          {currentTab === "analytics" && (
+            <StationOverview
+              station={selectedStation}
+              onNavigateToDiagnostic={() => setCurrentTab("diagnostic")}
+            />
+          )}
+
+          {currentTab === "library" && <PathogenLibraryView />}
+
+          {currentTab === "history" && (
+            <ScanHistoryView
+              history={history}
+              onSelectHistoryItem={handleSelectHistoryItem}
+              onClearHistory={handleClearHistory}
+            />
+          )}
+
+          {currentTab === "settings" && <StationConfigView />}
+        </main>
+      </div>
+
+      {/* Operator Authentication Modal (SkyGuard Sign In) */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onLogin={handleLogin}
+        currentUser={userSession}
       />
-
-      {/* Footer */}
-      <footer className="w-full py-5 text-center text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-[#164429]/60 px-4 space-y-1">
-        <p className="font-bold text-gray-700 dark:text-gray-300">
-          🌾 CropAI &bull; Production Crop Disease & Pest Diagnostic Engine
-        </p>
-        <p className="text-[11px] text-gray-400 dark:text-gray-500">
-          {t("footer.disclaimer")}
-        </p>
-      </footer>
     </div>
   );
 };
@@ -293,10 +323,9 @@ const CropAiApp: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <CropAiApp />
+      <CropGuardMain />
     </QueryClientProvider>
   );
 };
 
 export default App;
-
