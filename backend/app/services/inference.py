@@ -193,9 +193,14 @@ class InferenceService:
 
         # Optional plant gate check
         is_ood_gate = False
+        gate_prob = 1.0  # default: assume plant if no gate
         if self.gate_session is not None:
             gate_logit = self.gate_session.run(["plant_logit"], {"image": tensor})[0]
             gate_prob = float(1.0 / (1.0 + np.exp(-gate_logit.item())))
+            logger.info(
+                "Plant gate: prob=%.4f  threshold=%.4f  pass=%s",
+                gate_prob, self.plant_gate_threshold, gate_prob >= self.plant_gate_threshold,
+            )
             if gate_prob < self.plant_gate_threshold:
                 is_ood_gate = True
 
@@ -211,7 +216,25 @@ class InferenceService:
         # Energy-based OOD score
         energy = self._energy_score(logits_1d)
         is_uncertain = confidence < self.conf_threshold
-        is_ood = is_ood_gate or (energy > self.energy_threshold)
+
+        # OOD decision: combine gate + energy, but allow the main classifier
+        # to override the gate when it is highly confident.  The plant gate
+        # was trained on CIFAR-10 (32×32 upscaled) vs lab leaves, so it may
+        # reject valid real-world crop photos.  If the main model assigns
+        # ≥60 % calibrated probability to a known class, we trust it.
+        GATE_OVERRIDE_CONF = 0.60
+        is_ood_energy = energy > self.energy_threshold
+        if confidence >= GATE_OVERRIDE_CONF:
+            # High classifier confidence — only flag OOD if energy is extreme
+            is_ood = is_ood_energy and is_ood_gate
+        else:
+            is_ood = is_ood_gate or is_ood_energy
+
+        logger.info(
+            "OOD decision: gate_prob=%.4f  energy=%.4f  confidence=%.4f  "
+            "gate_reject=%s  energy_reject=%s  final_ood=%s",
+            gate_prob, energy, confidence, is_ood_gate, is_ood_energy, is_ood,
+        )
 
         # Top-3
         top3_idx = np.argsort(probs)[::-1][:3]

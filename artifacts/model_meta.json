@@ -55,8 +55,8 @@
   ],
   "temperature": 0.547371,
   "confidence_threshold": 0.8,
-  "energy_threshold": -5.7724,
-  "plant_gate_threshold": 0.45,
+  "energy_threshold": -10.0,
+  "plant_gate_threshold": 0.15,
   "outputs": [
     "logits",
     "cam_maps"
