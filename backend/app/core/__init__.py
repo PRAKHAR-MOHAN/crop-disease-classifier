@@ -47,6 +47,16 @@ class Settings(BaseSettings):
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "extra": "ignore"}
 
+    def model_post_init(self, __context: Any) -> None:
+        """Resolve paths relative to project root if CWD is `backend/`."""
+        repo_root = Path(__file__).resolve().parents[3]
+        for attr in ("model_onnx_path", "model_meta_path", "plant_gate_onnx_path", "advice_kb_path"):
+            val = getattr(self, attr, None)
+            if val and not Path(val).exists():
+                candidate = repo_root / val
+                if candidate.exists():
+                    setattr(self, attr, str(candidate))
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _parse_cors(cls, v: Any) -> str:
