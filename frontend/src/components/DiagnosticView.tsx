@@ -96,6 +96,17 @@ export const DiagnosticView: React.FC<DiagnosticViewProps> = ({
         <ResultSkeleton />
       ) : currentPrediction && previewUrl ? (
         <div className="space-y-6 animate-in fade-in duration-300 pb-16 sm:pb-4">
+          {currentPrediction.is_demo_mode && (
+            <div className="w-full max-w-xl mx-auto p-3.5 rounded-2xl bg-cyan-950/70 border border-cyan-700/60 text-cyan-200 text-xs shadow-md flex items-center justify-between gap-3">
+              <div className="flex items-center space-x-2.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
+                <span className="leading-snug">
+                  <strong className="text-white">Static Preview Demo Mode:</strong> Foliar pathology simulated in-browser. Connect live FastAPI ONNX backend by adding <code className="bg-[#050e18] px-1.5 py-0.5 rounded text-cyan-300 font-mono text-[11px]">VITE_API_URL</code> in Vercel settings.
+                </span>
+              </div>
+            </div>
+          )}
+
           {/* Result Card */}
           <ResultCard
             prediction={currentPrediction}

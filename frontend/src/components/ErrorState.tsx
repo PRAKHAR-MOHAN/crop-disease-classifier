@@ -19,6 +19,9 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
 
   const apiError = error instanceof ApiError ? error : null;
   const isRateLimit = apiError?.status === 429;
+  const isMethodNotAllowed =
+    apiError?.status === 405 ||
+    Boolean(error?.message && error.message.includes("405"));
   const isNetwork = !apiError || apiError.status === 0;
 
   useEffect(() => {
@@ -56,6 +59,8 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
             <h4 className="text-sm font-bold">
               {isRateLimit
                 ? "Rate Limit Exceeded"
+                : isMethodNotAllowed
+                ? "Backend Not Connected (HTTP 405)"
                 : isNetwork
                 ? "Connection Error"
                 : "Analysis Failed"}
@@ -63,6 +68,8 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
             <p className="text-xs leading-relaxed opacity-90">
               {isRateLimit
                 ? t("errors.rateLimit", { seconds: countdown })
+                : isMethodNotAllowed
+                ? "Vercel is hosting the frontend statically. Configure VITE_API_URL in your Vercel project environment settings to point to your live backend (e.g. on Render), or retry to use the built-in demo diagnostic."
                 : error.message || t("errors.serverError")}
             </p>
           </div>

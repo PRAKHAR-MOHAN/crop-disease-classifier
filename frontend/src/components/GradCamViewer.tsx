@@ -17,7 +17,11 @@ export const GradCamViewer: React.FC<GradCamViewerProps> = ({
   const [compareMode, setCompareMode] = useState<"overlay" | "split">("overlay");
   const [splitPos, setSplitPos] = useState(50); // percentage for split view
 
-  const heatmapSrc = gradcamBase64 ? `data:image/png;base64,${gradcamBase64}` : null;
+  const heatmapSrc = gradcamBase64
+    ? gradcamBase64.startsWith("data:")
+      ? gradcamBase64
+      : `data:image/png;base64,${gradcamBase64}`
+    : null;
 
   return (
     <div className="bg-[#0c2417] border border-[#1b4d32] rounded-3xl p-5 shadow-lg space-y-4">

@@ -29,6 +29,7 @@ export interface PredictionResponse {
   is_uncertain: boolean;
   is_ood: boolean;
   latency_ms: number;
+  is_demo_mode?: boolean;
 }
 
 export interface FeedbackRequest {
